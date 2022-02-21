@@ -1,5 +1,5 @@
 package pidev.spring.entities;
 
-public class Role {
+public enum RoleName {
 
 }
