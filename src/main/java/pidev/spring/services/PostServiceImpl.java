@@ -28,7 +28,7 @@ public class PostServiceImpl implements PostService{
 		return "Post updated successfully!";
 		
 	}
-
+  
 	@Override
 	public void deletePost(int idPost) {
 		postRepository.deleteById(idPost);
@@ -43,6 +43,20 @@ public class PostServiceImpl implements PostService{
 	@Override
 	public Post getPostById(int idPost) {
 		return postRepository.findById(idPost).get();
+	}
+	@Override
+	public Post updatePostById(Post post,int idPost) {
+	
+		Post found= postRepository.findById(idPost).orElse(null);
+		found.setCaption(post.getCaption());
+		found.setComments(post.getComments());
+		found.setContent(post.getContent());
+		found.setCreation_date(post.getCreation_date());
+		found.setDislikes(post.getDislikes());
+		found.setLikes(post.getLikes());
+		found.setViews(post.getViews());
+	    postRepository.saveAndFlush(found);
+		return found;
 	}
 
 }

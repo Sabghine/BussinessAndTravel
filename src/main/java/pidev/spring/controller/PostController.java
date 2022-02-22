@@ -44,5 +44,11 @@ public class PostController {
 	ResponseEntity<List<Post>> getAllPosts(){
 		return new ResponseEntity(postService.getAllPosts(), HttpStatus.OK);
 	}
+	@PutMapping("/modifyPostByID/{idPost}")
+	@ResponseBody
+	public Post ModifyPostById(@PathVariable("idPost") int idPost,@RequestBody Post post) {
+	return postService.updatePostById(post, idPost);
+	}
 	
+
 }
