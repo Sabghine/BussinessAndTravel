@@ -9,38 +9,35 @@ import pidev.spring.entities.Complaint;
 import pidev.spring.repository.ComplaintRepository;
 
 @Service
-public class ComplaintServiceImpl implements IComplaint {
-	@Autowired
-	ComplaintRepository complaintRepository;
+public class ComplaintServiceImpl implements IComplaint{
+	
+@Autowired
+ComplaintRepository complaintRepository;
 
-	@Override
-	public List<Complaint> retrieveAllComplaints() {
-		List<Complaint>complaints = (List<Complaint>) complaintRepository.findAll();
-		return complaints;
-	}
+@Override
+public List<Complaint> retrieveAllComplaints() {
+		return complaintRepository.findAll();
 
-	@Override
-	public Complaint addComplaint(Complaint c) {
-		complaintRepository.save(c);
-		return c;
-	}
+}
 
-	@Override
-	public void deleteComplaint(Long complaintId) {
-		complaintRepository.deleteByIdComplaint(complaintId);
-		
-	}
+@Override
+public Complaint addComplaint(Complaint c) {
+	return complaintRepository.save(c);
+}
 
-	@Override
-	public Complaint updateComplaint(Complaint c) {
-		
-		return complaintRepository.save(c);
-	}
+//@Override
+//public void deleteComplaint(Long id) {
+//complaintRepository.deleteByComplaintId(id);
+	
+//}
 
-	@Override
-	public Complaint retrieveComplaint(Long complaintId) {
-		Complaint complaint = complaintRepository.findByIdComplaint(complaintId);
-		return complaint;
-	}
+@Override
+public Complaint updateComplaint(Complaint c) {
+	return complaintRepository.save(c);
+}
 
+//@Override
+//public Complaint retrieveComplaint(Long id) {
+	//Complaint complaint = complaintRepository.findByIdComplaint(id);
+	//return complaint;
 }

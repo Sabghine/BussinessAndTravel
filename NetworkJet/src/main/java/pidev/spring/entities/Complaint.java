@@ -38,7 +38,7 @@ public class Complaint implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="complaintId")
-	private Long complaintId;
+	private Long id;
 	
 	@NonNull
 	private String content;
