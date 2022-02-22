@@ -11,7 +11,7 @@ public interface IComplaint {
 	
 	List<Complaint> retrieveAllComplaints();
 
-	Complaint addFournisseur(Complaint c);
+	Complaint addComplaint(Complaint c);
 
 	@Transactional
 	void deleteComplaint(Long complaintId);
