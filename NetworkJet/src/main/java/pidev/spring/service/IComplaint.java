@@ -1,4 +1,4 @@
-package pivdev.spring.service;
+package pidev.spring.service;
 
 import java.util.List;
 
