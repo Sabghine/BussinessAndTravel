@@ -1,5 +1,5 @@
 package pidev.spring.entities;
 
-public class Employee {
+public class User {
 
 }
