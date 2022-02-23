@@ -3,6 +3,7 @@ package pidev.spring.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -53,5 +54,12 @@ public class FeedbackRestController {
 			public Feedback updateFeedback(@PathVariable("id") Long id, @RequestBody Feedback f) {
 				return feedbackService.updateFeedback(f, id);
 				 
+			}
+			
+			//http://localhost:8080/feedback/delete/1
+			@DeleteMapping("/delete/{id}")
+			@ResponseBody
+			public void deleteFeedback(@PathVariable("id") Long feedbackId) {
+				feedbackService.deleteFeedback(feedbackId);
 			}
 }
