@@ -18,8 +18,7 @@ public class FeedbackServiceImpl implements IFeedback {
 
 	@Override
 	public List<Feedback> retrieveAllFeedbacks() {
-		// TODO Auto-generated method stub
-		return null;
+		return feebackRepository.findAll();
 	}
 
 	@Override
@@ -31,14 +30,16 @@ public class FeedbackServiceImpl implements IFeedback {
 
 	@Override
 	public void deleteProduit(Long id) {
-		// TODO Auto-generated method stub
+		feebackRepository.deleteById(id);
 		
 	}
 
 	@Override
-	public Feedback updateFeedback(Feedback f) {
-		// TODO Auto-generated method stub
-		return null;
+	public Feedback updateFeedback(Feedback f , Long id) {
+		Date dateFeedback = new Date();
+		f.setDatefeedback(dateFeedback);
+		f.setId(id);
+		return feebackRepository.save(f);
 	}
 
 	@Override

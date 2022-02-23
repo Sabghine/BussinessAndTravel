@@ -1,7 +1,9 @@
 package pidev.spring.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,4 +25,12 @@ public class FeedbackRestController {
 		return feedbackService.addFeeback(f);
 		
 	}
+	
+	// http://localhost:8080/feedback/update/5
+			@PutMapping("/update/{id}")
+			@ResponseBody
+			public Feedback updateFeedback(@PathVariable("id") Long id, @RequestBody Feedback f) {
+				return feedbackService.updateFeedback(f, id);
+				 
+			}
 }
