@@ -1,5 +1,6 @@
 package pidev.spring.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,31 +18,33 @@ public class FeedbackServiceImpl implements IFeedback {
 
 	@Override
 	public List<Feedback> retrieveAllFeedbacks() {
-		// TODO Auto-generated method stub
-		return null;
+		return feebackRepository.findAll();
 	}
 
 	@Override
 	public Feedback addFeeback(Feedback f) {
+		Date dateFeedback = new Date();
+		f.setDatefeedback(dateFeedback);
 		return feebackRepository.save(f);
 	}
 
 	@Override
-	public void deleteProduit(Long id) {
-		// TODO Auto-generated method stub
+	public void deleteFeedback(Long id) {
+		feebackRepository.deleteById(id);
 		
 	}
 
 	@Override
-	public Feedback updateFeedback(Feedback f) {
-		// TODO Auto-generated method stub
-		return null;
+	public Feedback updateFeedback(Feedback f , Long id) {
+		Date dateFeedback = new Date();
+		f.setDatefeedback(dateFeedback);
+		f.setId(id);
+		return feebackRepository.save(f);
 	}
 
 	@Override
-	public Feedback retrieveFeed(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Feedback retrieveFeedback(Long id) {
+		return feebackRepository.findById(id).orElse(null);
 	}
 
 }

@@ -15,10 +15,10 @@ public interface IFeedback {
 	Feedback addFeeback(Feedback f);
 
 	@Transactional
-	void deleteProduit(Long id);
+	void deleteFeedback(Long id);
 
-	Feedback updateFeedback(Feedback f);
+	Feedback updateFeedback(Feedback f, Long id);
 
-	Feedback retrieveFeed(Long id);
+	Feedback retrieveFeedback(Long id);
 
 }
