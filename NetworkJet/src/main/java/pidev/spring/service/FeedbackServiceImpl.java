@@ -29,7 +29,7 @@ public class FeedbackServiceImpl implements IFeedback {
 	}
 
 	@Override
-	public void deleteProduit(Long id) {
+	public void deleteFeedback(Long id) {
 		feebackRepository.deleteById(id);
 		
 	}
@@ -43,9 +43,8 @@ public class FeedbackServiceImpl implements IFeedback {
 	}
 
 	@Override
-	public Feedback retrieveFeed(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Feedback retrieveFeedback(Long id) {
+		return feebackRepository.findById(id).orElse(null);
 	}
 
 }

@@ -38,6 +38,8 @@ public class ComplaintServiceImpl implements IComplaint{
 
 	@Override
 	public Complaint updateComplaint(Complaint c , Long id) {
+		Date dateComplaint = new Date();
+		c.setDateComplaint(dateComplaint);
 		c.setId(id);
 		return complaintRepository.save(c);
 	}
