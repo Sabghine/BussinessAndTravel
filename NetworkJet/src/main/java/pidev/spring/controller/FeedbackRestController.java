@@ -1,5 +1,7 @@
 package pidev.spring.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +20,15 @@ import pidev.spring.service.IFeedback;
 public class FeedbackRestController {
 	@Autowired
 	IFeedback feedbackService;
+	
+	
+	// http://localhost:8080/complaint/retrieve-all
+			@GetMapping("/retrieve-all")
+			@ResponseBody
+			public List<Feedback> getFeedbacks() {
+				return feedbackService.retrieveAllFeedbacks();
+				
+			}
 	
 	
 	//http://localhost:8080/feedback/get/5	
