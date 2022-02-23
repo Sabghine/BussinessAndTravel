@@ -1,5 +1,6 @@
 package pidev.spring.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +19,14 @@ public class ComplaintServiceImpl implements IComplaint{
 
 	@Override
 	public List<Complaint> retrieveAllComplaints() {
-		List<Complaint> complaints = (List<Complaint>) complaintRepository.findAll();
-		return complaints;
+		return complaintRepository.findAll();
+		
 	}
 
 	@Override
 	public Complaint addComplaint(Complaint c) {
+		Date dateComplaint = new Date();
+		c.setDateComplaint(dateComplaint);
 		return complaintRepository.save(c);
 	}
 
@@ -34,13 +37,15 @@ public class ComplaintServiceImpl implements IComplaint{
 	}
 
 	@Override
-	public Complaint updateComplaint(Complaint c) {
+	public Complaint updateComplaint(Complaint c , Long id) {
+		c.setId(id);
 		return complaintRepository.save(c);
 	}
 
 	@Override
 	public Complaint retrieveComplaint(Long id) {
-		return null;
+		return complaintRepository.findById(id).orElse(null);
+		
 	}
 }
 	
