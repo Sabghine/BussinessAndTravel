@@ -1,5 +1,6 @@
 package pidev.spring.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,8 @@ public class FeedbackServiceImpl implements IFeedback {
 
 	@Override
 	public Feedback addFeeback(Feedback f) {
+		Date dateFeedback = new Date();
+		f.setDatefeedback(dateFeedback);
 		return feebackRepository.save(f);
 	}
 
