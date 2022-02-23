@@ -14,11 +14,11 @@ public interface IComplaint {
 
 	Complaint addComplaint(Complaint c);
 
-	//@Transactional
-	//void deleteComplaint(Long id);
+	@Transactional
+	void deleteComplaint(Long id);
 
 	Complaint updateComplaint(Complaint c);
 
-	//Complaint retrieveComplaint(Long id);
+	Complaint retrieveComplaint(Long id);
 
 }
