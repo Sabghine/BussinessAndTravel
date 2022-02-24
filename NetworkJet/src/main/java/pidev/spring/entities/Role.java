@@ -1,5 +1,5 @@
 package pidev.spring.entities;
 
-public class Admin {
+public class Role {
 
 }

@@ -21,9 +21,9 @@ public class Invitation {
 	@Id
 	@GeneratedValue (strategy= GenerationType.IDENTITY)
 	private Long idInvitation;
-	private Date date_invitation;
 	private Date date_expiration;
 	private String message;
 	private String token;
+	private String email;
 
 }
