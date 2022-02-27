@@ -22,4 +22,5 @@ public class Planning {
 	private Long idPlanning;
 	private int nb_jours;
 	private String idVol;
+	private String fichierPlanning;
 }
