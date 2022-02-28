@@ -10,35 +10,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import pidev.spring.entities.Invitation;
-import pidev.spring.service.InvitationService;
+import pidev.spring.entities.Planning;
+import pidev.spring.service.PlanningService;
 
 @RestController
-@RequestMapping("/api/invitation")
+@RequestMapping("/api/planning")
 @CrossOrigin
-public class InvitationRestController {
+public class PlanningRestController {
 	
 	@Autowired
-	InvitationService invitationService;
+	PlanningService planningService;
 	@RequestMapping(method = RequestMethod.GET)
-	public List<Invitation> getAllInvitations() {
-	return invitationService.getAllInvitations();
+	public List<Planning> getAllPlannings() {
+	return planningService.getAllPlannings();
 	}
 	@RequestMapping(value="/{id}",method = RequestMethod.GET)
-	public Invitation getInvitationById(@PathVariable("id") Long id) {
-	return invitationService.getInvitation(id);
+	public Planning getPlanningById(@PathVariable("id") Long id) {
+	return planningService.getPlanning(id);
 	 }
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public Invitation sendInvitation(@RequestBody Invitation invitation) {
-	return invitationService.saveInvitation(invitation);
+	public Planning sendInvitation(@RequestBody Planning planning) {
+	return planningService.savePlanning(planning);
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT)
-	public Invitation updateInvitation(@RequestBody Invitation invitation) {
-	return invitationService.updateInvitation(invitation);
+	public Planning updatePlanning(@RequestBody Planning planning) {
+	return planningService.updatePlanning(planning);
 	}
-
-
 
 }
