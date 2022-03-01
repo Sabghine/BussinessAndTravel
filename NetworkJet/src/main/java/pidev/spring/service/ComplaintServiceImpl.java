@@ -70,21 +70,27 @@ public class ComplaintServiceImpl implements IComplaint{
 			List<Complaint> comp=(List<Complaint>) complaintRepository.findAll();
 			int max=0;
 			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-			Date date = new Date();
-			
-			for(Complaint c:comp) {
-				
-				
+			Date date = new Date();			
+			for(Complaint c:comp) {			
 			if ((c.getDateComplaint().getDay()== date.getDay() ) 
 					&& (c.getDateComplaint().getMonth()==date.getMonth() 
 					&&(c.getDateComplaint().getYear() ==date.getYear())))
-							max++;
-			
-			
-		}
-			return max;
-		
+							max++;		
+			}
+			return max;	
 	}
+	
+	
+	
+
+	//@Override
+	//public List<Complaint> SearchComplaint() {
+	//	List<Complaint> com=(List<Complaint>)complaintRepository.retrieveAllComplaintsByStatut("grave");
+		//for(Complaint complaint:com) {
+		
+	//}
+		//return com;
+	//}
 	
 	
 }

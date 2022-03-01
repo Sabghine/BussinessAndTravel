@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import pidev.spring.entities.Complaint;
+import pidev.spring.repository.ComplaintRepository;
 import pidev.spring.service.IComplaint;
 
 @RestController
@@ -73,6 +74,13 @@ public class ComplaintRestController {
 		   public int CountComplaint() {
 		   return complaintService.CountComplaint();
 		   }
+		 
+		 //@GetMapping("/recherche")
+		 // @ResponseBody
+		// public List<Complaint> SearchComp() {
+			//  List<Complaint> list  =complaintService.SearchComplaint();
+			//return list;
+		 //  }
 
 	}
 

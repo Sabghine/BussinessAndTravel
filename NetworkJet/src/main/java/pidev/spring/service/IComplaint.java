@@ -24,5 +24,7 @@ public interface IComplaint {
 	int CountComplaint();
 	
 	public int ComplaintToday();
+	
+	//public List<Complaint> SearchComplaint();
 
 }
