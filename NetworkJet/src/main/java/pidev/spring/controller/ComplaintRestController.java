@@ -61,6 +61,13 @@ public class ComplaintRestController {
 			complaintService.deleteComplaint(complaintId);
 		}
 		
+		@GetMapping ("/ComplaintToday")
+		@ResponseBody
+		   public int ComplaintToday() {
+		   return complaintService.ComplaintToday();
+		   }
+		
+		
 		 @GetMapping("/count")
 		   @ResponseBody
 		   public int CountComplaint() {

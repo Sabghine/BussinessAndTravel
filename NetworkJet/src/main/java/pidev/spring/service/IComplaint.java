@@ -22,5 +22,7 @@ public interface IComplaint {
 	Complaint retrieveComplaint(Long id);
 	
 	int CountComplaint();
+	
+	public int ComplaintToday();
 
 }

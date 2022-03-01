@@ -1,5 +1,7 @@
 package pidev.spring.service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -60,6 +62,31 @@ public class ComplaintServiceImpl implements IComplaint{
 		}
 		return max;
 	}
+
+	@Override
+	@SuppressWarnings("deprecation")
+	public int ComplaintToday() {
+		
+			List<Complaint> comp=(List<Complaint>) complaintRepository.findAll();
+			int max=0;
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			Date date = new Date();
+			
+			for(Complaint c:comp) {
+				
+				
+			if ((c.getDateComplaint().getDay()== date.getDay() ) 
+					&& (c.getDateComplaint().getMonth()==date.getMonth() 
+					&&(c.getDateComplaint().getYear() ==date.getYear())))
+							max++;
+			
+			
+		}
+			return max;
+		
+	}
+	
+	
 }
 	
 	
