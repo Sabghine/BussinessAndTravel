@@ -60,6 +60,12 @@ public class ComplaintRestController {
 		public void deleteComplaint(@PathVariable("id") Long complaintId) {
 			complaintService.deleteComplaint(complaintId);
 		}
+		
+		 @GetMapping("/count")
+		   @ResponseBody
+		   public int CountComplaint() {
+		   return complaintService.CountComplaint();
+		   }
 
 	}
 

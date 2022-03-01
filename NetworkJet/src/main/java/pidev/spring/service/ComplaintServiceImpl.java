@@ -49,6 +49,17 @@ public class ComplaintServiceImpl implements IComplaint{
 		return complaintRepository.findById(id).orElse(null);
 		
 	}
+
+	@Override
+	public int CountComplaint() {
+		int max=0;
+		List<Complaint> c =(List<Complaint>) complaintRepository.findAll();
+		for(Complaint complaint:c) {
+			max++;
+			
+		}
+		return max;
+	}
 }
 	
 	

@@ -20,5 +20,7 @@ public interface IComplaint {
 	Complaint updateComplaint(Complaint c,Long id);
 
 	Complaint retrieveComplaint(Long id);
+	
+	int CountComplaint();
 
 }
