@@ -11,8 +11,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
 
-import pidev.spring.Repository.User_Repository;
-import pidev.spring.Service.User_Service;
+import pidev.spring.repository.User_Repository;
+import pidev.spring.service.User_Service;
 import pidev.spring.entities.User;
 @Component
 public class CustomLoginFailureHandler extends SimpleUrlAuthenticationFailureHandler{

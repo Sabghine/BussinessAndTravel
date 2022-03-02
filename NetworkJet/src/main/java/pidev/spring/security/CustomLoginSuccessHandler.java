@@ -11,8 +11,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
-import pidev.spring.Service.Session_UserDetails;
-import pidev.spring.Service.User_Service;
+import pidev.spring.service.Session_UserDetails;
+import pidev.spring.service.User_Service;
 import pidev.spring.entities.User;
 @Component
 public class CustomLoginSuccessHandler  extends SimpleUrlAuthenticationSuccessHandler{

@@ -21,7 +21,7 @@ import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import pidev.spring.ExternService.Custom_Oauth2_User_Service;
-import pidev.spring.Service.User_Details_Service_Impl;
+import pidev.spring.service.User_Details_Service_Impl;
 
 @EnableGlobalMethodSecurity(securedEnabled = true, jsr250Enabled = true, prePostEnabled = true)
 @Configuration

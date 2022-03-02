@@ -1,4 +1,4 @@
-package pidev.spring.Controller;
+package pidev.spring.controller;
 
 
 import java.io.UnsupportedEncodingException;
@@ -41,10 +41,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.slf4j.Slf4j;
 import pidev.spring.Exeption.API_Request_Exception_NotFound;
-import pidev.spring.Repository.Role_Repository;
-import pidev.spring.Repository.User_Repository;
-import pidev.spring.Service.Session_UserDetails;
-import pidev.spring.Service.User_Service;
+import pidev.spring.repository.Role_Repository;
+import pidev.spring.repository.User_Repository;
+import pidev.spring.service.Session_UserDetails;
+import pidev.spring.service.User_Service;
 import pidev.spring.entities.ERole;
 import pidev.spring.entities.Role;
 import pidev.spring.entities.User;

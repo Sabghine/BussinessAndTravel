@@ -1,4 +1,4 @@
-package pidev.spring.Service;
+package pidev.spring.service;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import pidev.spring.InterfaceService.Interface_User_Role_Service;
-import pidev.spring.Repository.Role_Repository;
+import pidev.spring.repository.Role_Repository;
 import pidev.spring.entities.Role;
  
  

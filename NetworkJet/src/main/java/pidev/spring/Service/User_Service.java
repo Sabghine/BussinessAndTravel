@@ -1,4 +1,4 @@
-package pidev.spring.Service;
+package pidev.spring.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,8 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import lombok.extern.slf4j.Slf4j;
 import pidev.spring.InterfaceService.Interface_User_Service;
-import pidev.spring.Repository.Role_Repository;
-import pidev.spring.Repository.User_Repository;
+import pidev.spring.repository.Role_Repository;
+import pidev.spring.repository.User_Repository;
 import pidev.spring.entities.User;
 @Slf4j
 @Service("I_User_Service")

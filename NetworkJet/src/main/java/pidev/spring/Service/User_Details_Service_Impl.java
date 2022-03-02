@@ -1,4 +1,4 @@
-package pidev.spring.Service;
+package pidev.spring.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import pidev.spring.Repository.User_Repository;
+import pidev.spring.repository.User_Repository;
 import pidev.spring.entities.User;
 
 @Service
