@@ -1,5 +1,7 @@
 package pidev.spring.service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -49,6 +51,64 @@ public class ComplaintServiceImpl implements IComplaint{
 		return complaintRepository.findById(id).orElse(null);
 		
 	}
+	
+	
+
+	@Override
+	public int CountComplaint() {
+		int max=0;
+		List<Complaint> c =(List<Complaint>) complaintRepository.findAll();
+		for(Complaint complaint:c) {
+			max++;
+			
+		}
+		return max;
+	}
+
+	@Override
+	@SuppressWarnings("deprecation")
+	public int ComplaintToday() {
+		
+			List<Complaint> comp=(List<Complaint>) complaintRepository.findAll();
+			int max=0;
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			Date date = new Date();			
+			for(Complaint c:comp) {			
+			if ((c.getDateComplaint().getDay()== date.getDay() ) 
+					&& (c.getDateComplaint().getMonth()==date.getMonth() 
+					&&(c.getDateComplaint().getYear() ==date.getYear())))
+							max++;		
+			}
+			return max;	
+	}
+
+	//@Override
+	//public void sendMail(long userId) {
+	//	User u = userRepository.findById(userId).orElse(null);
+       // SimpleMailMessage msg = new SimpleMailMessage();
+
+      //  msg.setFrom("chedlikad@gmail.com");
+      //  msg.setTo(u.getEmail());
+      //  msg.setSubject("Champ de saisie du sujet");
+       // msg.setText("Champ de saisie du corps");
+
+       // this.sender.send(msg);
+   // }
+	
+		
+	//}
+	
+	
+	
+
+	//@Override
+	//public List<Complaint> SearchComplaint() {
+	//	List<Complaint> com=(List<Complaint>)complaintRepository.retrieveAllComplaintsByStatut("grave");
+		//for(Complaint complaint:com) {
+		
+	//}
+		//return com;
+	//}
 }
 	
 	
