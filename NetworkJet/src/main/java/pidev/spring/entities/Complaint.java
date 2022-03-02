@@ -5,9 +5,14 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -41,13 +46,20 @@ public class Complaint implements Serializable{
 	private Long id;
 	
 	@NonNull
-	private String content;
+	private String object;
 	
 	@NonNull
-	private String statut;
+	private String description;
+	
+	@Enumerated(EnumType.STRING)
+	private StatusComplaints statusComplaints ;
 	
 	private Date dateComplaint;
 	
+
+	@ManyToOne
+	@JsonIgnore
+	private User user;
 
 
 }

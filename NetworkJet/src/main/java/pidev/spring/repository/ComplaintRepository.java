@@ -11,4 +11,6 @@ import pidev.spring.entities.Complaint;
 @Repository
 public interface ComplaintRepository extends JpaRepository<Complaint ,Long> {
 	
+	
+	
 }
