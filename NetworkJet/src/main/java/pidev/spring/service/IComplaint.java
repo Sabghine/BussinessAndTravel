@@ -7,18 +7,18 @@ import org.springframework.transaction.annotation.Transactional;
 
 import pidev.spring.entities.Complaint;
 
-@Repository
+
 public interface IComplaint {
 	
 	List<Complaint> retrieveAllComplaints();
 
-	Complaint addComplaint(Complaint c);
+	public Complaint addComplaint(Complaint c);
 
-	//@Transactional
-	//void deleteComplaint(Long id);
+	@Transactional
+	void deleteComplaint(Long id);
 
-	Complaint updateComplaint(Complaint c);
+	Complaint updateComplaint(Complaint c,Long id);
 
-	//Complaint retrieveComplaint(Long id);
+	Complaint retrieveComplaint(Long id);
 
 }

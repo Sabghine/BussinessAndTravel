@@ -36,7 +36,7 @@ public class Feedback implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="feedbackId")
-	private Long feedbackId;
+	private Long id;
 	
 	@NonNull
 	private String content;
