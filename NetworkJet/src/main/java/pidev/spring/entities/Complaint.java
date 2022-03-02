@@ -8,6 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -40,13 +43,21 @@ public class Complaint implements Serializable{
 	@Column(name="complaintId")
 	private Long id;
 	
+	
 	@NonNull
-	private String content;
+	private String object;
+	
+	@NonNull
+	private String description;
 	
 	@NonNull
 	private String statut;
 	
 	private Date dateComplaint;
+	
+	//@ManyToOne
+	//@JsonIgnore
+	//private User user;
 	
 
 

@@ -19,3 +19,4 @@ public interface ComplaintRepository extends JpaRepository<Complaint ,Long> {
 	//List<Complaint> retrieveAllComplaintsByStatut(@Param("grave")String State);
 	
 }
+

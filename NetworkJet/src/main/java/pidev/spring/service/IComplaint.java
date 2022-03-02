@@ -25,6 +25,9 @@ public interface IComplaint {
 	
 	public int ComplaintToday();
 	
+	// public void sendMail(long userId);
+
+	
 	//public List<Complaint> SearchComplaint();
 
 }

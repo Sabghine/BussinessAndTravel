@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -38,11 +39,18 @@ public class Feedback implements Serializable{
 	@Column(name="feedbackId")
 	private Long id;
 	
+	
 	@NonNull
-	private String content;
+	private String object;
+	
+	@NonNull
+	private String description;
 
 	
 	private Date datefeedback;
+	
+	//@ManyToOne
+	//private User user;
 	
 
 

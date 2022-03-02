@@ -79,6 +79,22 @@ public class ComplaintServiceImpl implements IComplaint{
 			}
 			return max;	
 	}
+
+	//@Override
+	//public void sendMail(long userId) {
+	//	User u = userRepository.findById(userId).orElse(null);
+       // SimpleMailMessage msg = new SimpleMailMessage();
+
+      //  msg.setFrom("chedlikad@gmail.com");
+      //  msg.setTo(u.getEmail());
+      //  msg.setSubject("Champ de saisie du sujet");
+       // msg.setText("Champ de saisie du corps");
+
+       // this.sender.send(msg);
+   // }
+	
+		
+	//}
 	
 	
 	
