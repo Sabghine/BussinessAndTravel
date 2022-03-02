@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import pidev.spring.entities.Invitation;
 import pidev.spring.entities.Planning;
 import pidev.spring.service.PlanningService;
 
@@ -20,12 +21,15 @@ public class PlanningRestController {
 	
 	@Autowired
 	PlanningService planningService;
+	
 	@RequestMapping(method = RequestMethod.GET)
 	public List<Planning> getAllPlannings() {
 	return planningService.getAllPlannings();
 	}
+	
 	@RequestMapping(value="/{id}",method = RequestMethod.GET)
 	public Planning getPlanningById(@PathVariable("id") Long id) {
+		
 	return planningService.getPlanning(id);
 	 }
 	
@@ -37,6 +41,12 @@ public class PlanningRestController {
 	@RequestMapping(method = RequestMethod.PUT)
 	public Planning updatePlanning(@RequestBody Planning planning) {
 	return planningService.updatePlanning(planning);
+	}
+	
+	@RequestMapping(value="/{id}",method = RequestMethod.DELETE)
+	public void deletePlanning(@PathVariable("id") Long id)
+	{
+	planningService.deletePlanningById(id);
 	}
 
 }

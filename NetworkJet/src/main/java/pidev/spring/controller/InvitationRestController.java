@@ -15,9 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import pidev.spring.entities.Complaint;
 import pidev.spring.entities.Invitation;
-import pidev.spring.service.IComplaint;
 import pidev.spring.service.InvitationService;
 
 @RestController
@@ -29,13 +27,12 @@ public class InvitationRestController {
 	private InvitationService invitationService;
 	
 	
-	@GetMapping("/getall")
-	@ResponseBody
-	ResponseEntity <List<Invitation>> getAllInvitations() {
-	return new ResponseEntity(invitationService.getAllInvitations(),HttpStatus.OK);
+	@RequestMapping(method = RequestMethod.GET)
+	public List<Invitation> getAllInvitations() {
+	return invitationService.getAllInvitations();
 	}
 
-	
+
 	
 	@RequestMapping(value="/{id}",method = RequestMethod.GET)
 	public Invitation getInvitationById(@PathVariable("id") Long id) {
