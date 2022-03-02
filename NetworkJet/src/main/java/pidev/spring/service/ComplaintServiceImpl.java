@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import pidev.spring.entities.Complaint;
@@ -87,6 +88,11 @@ public class ComplaintServiceImpl implements IComplaint{
 	public List<Complaint> ListComplaintsByStatus(StatusComplaints statusComplaints) {
 		return complaintRepository.findByStatusComplaints(statusComplaints);
 	}
+
+	@Override
+	public List<Complaint> GetSortedComplaints(String field) {
+		return complaintRepository.findAll(Sort.by(Sort.Direction.DESC,field)) ;
+	}
 	
 	
 
@@ -95,7 +101,7 @@ public class ComplaintServiceImpl implements IComplaint{
 	//	User u = userRepository.findById(userId).orElse(null);
        // SimpleMailMessage msg = new SimpleMailMessage();
 
-      //  msg.setFrom("chedlikad@gmail.com");
+      //  msg.setFrom("");
       //  msg.setTo(u.getEmail());
       //  msg.setSubject("Champ de saisie du sujet");
        // msg.setText("Champ de saisie du corps");

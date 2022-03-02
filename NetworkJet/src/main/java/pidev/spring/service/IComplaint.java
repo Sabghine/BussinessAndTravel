@@ -28,6 +28,9 @@ public interface IComplaint {
 	
 	List<Complaint> ListComplaintsByStatus(StatusComplaints statusComplaints);
 	
+	List<Complaint> GetSortedComplaints(String field);
+
+	
 	// public void sendMail(long userId);
 
 	

@@ -81,6 +81,13 @@ public class ComplaintRestController {
 				return complaintService.ListComplaintsByStatus(statusComplaints);
 			}
 		 
+		 
+		 @GetMapping("/{field}")
+			@ResponseBody
+			List<Complaint> GetSortedComplaints(@PathVariable("field") String field){
+			return complaintService.GetSortedComplaints(field);
+			}
+		 
 		 //@GetMapping("/recherche")
 		 // @ResponseBody
 		// public List<Complaint> SearchComp() {
