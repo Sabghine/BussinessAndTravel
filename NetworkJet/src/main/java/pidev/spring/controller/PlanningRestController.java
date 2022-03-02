@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import pidev.spring.entities.Invitation;
 import pidev.spring.entities.Planning;
 import pidev.spring.service.PlanningService;
 
