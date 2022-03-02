@@ -44,8 +44,8 @@ public class InvitationServiceImpl implements InvitationService {
 
 	@Override
 	public List<Invitation> getAllInvitations() {
-		invitationRepository.findAll();
-		return null;
+		return invitationRepository.findAll();
+		 
 	}
 
 }
