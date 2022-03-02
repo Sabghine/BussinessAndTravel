@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
 
 import pidev.spring.entities.Complaint;
+import pidev.spring.entities.StatusComplaints;
 
 
 public interface IComplaint {
@@ -24,6 +25,8 @@ public interface IComplaint {
 	int CountComplaint();
 	
 	public int ComplaintToday();
+	
+	List<Complaint> ListComplaintsByStatus(StatusComplaints statusComplaints);
 	
 	// public void sendMail(long userId);
 

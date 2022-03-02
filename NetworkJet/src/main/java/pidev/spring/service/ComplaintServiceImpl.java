@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import pidev.spring.entities.Complaint;
+import pidev.spring.entities.StatusComplaints;
 import pidev.spring.repository.ComplaintRepository;
 
 
@@ -81,6 +82,13 @@ public class ComplaintServiceImpl implements IComplaint{
 			}
 			return max;	
 	}
+
+	@Override
+	public List<Complaint> ListComplaintsByStatus(StatusComplaints statusComplaints) {
+		return complaintRepository.findByStatusComplaints(statusComplaints);
+	}
+	
+	
 
 	//@Override
 	//public void sendMail(long userId) {

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import pidev.spring.entities.Complaint;
+import pidev.spring.entities.StatusComplaints;
 import pidev.spring.service.IComplaint;
 
 @RestController
@@ -23,7 +24,7 @@ public class ComplaintRestController {
 	IComplaint complaintService;
 	
 	// http://localhost:8080/complaint/retrieve-all-complaints
-		@GetMapping("/retrieve-all")
+		@GetMapping("/get-all")
 		@ResponseBody
 		public List<Complaint> getComplaints() {
 			return complaintService.retrieveAllComplaints();
@@ -73,6 +74,12 @@ public class ComplaintRestController {
 		   public int CountComplaint() {
 		   return complaintService.CountComplaint();
 		   }
+		 
+		 @GetMapping("/GetComplaintStatus/{statusComplaints}")
+			@ResponseBody
+			 List<Complaint> GetComplaintStatus(@PathVariable("statusComplaints")StatusComplaints statusComplaints) {
+				return complaintService.ListComplaintsByStatus(statusComplaints);
+			}
 		 
 		 //@GetMapping("/recherche")
 		 // @ResponseBody
