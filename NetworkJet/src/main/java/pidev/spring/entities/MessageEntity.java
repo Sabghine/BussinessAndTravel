@@ -1,33 +1,32 @@
 package pidev.spring.entities;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
 import com.sun.istack.NotNull;
 
 import lombok.Data;
 
-@Entity
+@Entity(name = "messageee")
 @Data
-public class User {
-	
+public class MessageEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@NotNull
-	@Column(unique = true, length = 50)
-	private String email;
+	private String message;
 	
-	@NotNull
-	@Column(unique = true, length = 20)
-	private String userName;
+	private String fromLogin;
 	
+	@Override
+    public String toString() {
+        return "MessageModel{" +
+                "message='" + message + '\'' +
+                ", fromLogin='" + fromLogin + '\'' +
+                '}';
+    }
+
 }
