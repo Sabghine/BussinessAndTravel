@@ -88,6 +88,14 @@ public class ComplaintRestController {
 			return complaintService.GetSortedComplaints(field);
 			}
 		 
+		 @PostMapping("/mail/{userId}")
+			@ResponseBody
+			public void sendMail( @PathVariable("userId") long userId) {
+				complaintService.sendMail(userId);
+			}
+		 
+		 
+		 
 		 //@GetMapping("/recherche")
 		 // @ResponseBody
 		// public List<Complaint> SearchComp() {

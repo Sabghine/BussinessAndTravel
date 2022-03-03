@@ -31,7 +31,7 @@ public interface IComplaint {
 	List<Complaint> GetSortedComplaints(String field);
 
 	
-	// public void sendMail(long userId);
+	 public void sendMail(long userId);
 
 	
 	//public List<Complaint> SearchComplaint();

@@ -11,7 +11,12 @@ import org.springframework.stereotype.Service;
 
 import pidev.spring.entities.Complaint;
 import pidev.spring.entities.StatusComplaints;
+import pidev.spring.entities.User;
 import pidev.spring.repository.ComplaintRepository;
+import pidev.spring.repository.UserRepository;
+
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
 
 
 
@@ -20,10 +25,18 @@ public class ComplaintServiceImpl implements IComplaint{
 	
 	@Autowired
 	ComplaintRepository complaintRepository;
+	
+	@Autowired
+	UserRepository userRepository;
+	
+	@Autowired
+    private MailSender sender;
 
 	@Override
 	public List<Complaint> retrieveAllComplaints() {
 		return complaintRepository.findAll();
+		
+		
 		
 	}
 
@@ -96,21 +109,21 @@ public class ComplaintServiceImpl implements IComplaint{
 	
 	
 
-	//@Override
-	//public void sendMail(long userId) {
-	//	User u = userRepository.findById(userId).orElse(null);
-       // SimpleMailMessage msg = new SimpleMailMessage();
+	@Override
+	public void sendMail(long userId) {
+	User u = userRepository.findById(userId).orElse(null);
+    SimpleMailMessage msg = new SimpleMailMessage();
 
-      //  msg.setFrom("");
-      //  msg.setTo(u.getEmail());
-      //  msg.setSubject("Champ de saisie du sujet");
-       // msg.setText("Champ de saisie du corps");
+     msg.setFrom("sabrine.networkjet@gmail.com");
+     msg.setTo(u.getEmail());
+     msg.setSubject("Reclamation inconnue");
+     msg.setText("svp veuillez verifier cette reclamation");
 
-       // this.sender.send(msg);
-   // }
+      this.sender.send(msg);
+    }
 	
 		
-	//}
+	}
 	
 	
 	
@@ -123,6 +136,6 @@ public class ComplaintServiceImpl implements IComplaint{
 	//}
 		//return com;
 	//}
-}
+
 	
 	
