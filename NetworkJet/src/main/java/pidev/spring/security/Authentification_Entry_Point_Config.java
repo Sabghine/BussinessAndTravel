@@ -23,7 +23,7 @@ public class Authentification_Entry_Point_Config extends BasicAuthenticationEntr
 	
 	@Override
 	public void afterPropertiesSet() {
-		 setRealmName("mouhamed ahed Project");
+		 setRealmName("Chaima Farhat Project");
 		 super.afterPropertiesSet();
 	}
 	
