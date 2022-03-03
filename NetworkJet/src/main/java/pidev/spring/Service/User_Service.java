@@ -3,7 +3,6 @@ package pidev.spring.Service;
 import java.util.List;
 import java.util.Optional;
 
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,6 +14,7 @@ import pidev.spring.Repository.Role_Repository;
 import pidev.spring.Repository.User_Repository;
 import pidev.spring.entities.User;
 @Slf4j
+
 @Service("I_User_Service")
 @Transactional
 public class User_Service implements Interface_User_Service {
@@ -56,24 +56,18 @@ public class User_Service implements Interface_User_Service {
 		userToSave.setLastName(user.getLastName());
 		userToSave.setPassword(passwordEncoder.encode(user.getPassword()));
 		userToSave.setEmail(user.getEmail());
-		userToSave.setActif(false);
+		userToSave.setActif(true);
 		userToSave.setDate(user.getDate());
 
 		return Jpa_User_Repository.save(userToSave);
 	}
 
 	@Override
-	public String deleteById(Long id) {
+	public void deleteById(Long id) {
 
-		JSONObject jsonObject = new JSONObject();
-		try {
 			Jpa_User_Repository.deleteById(id);
-			jsonObject.put("message", "User deleted successfully ");
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return jsonObject.toString();
+	
 	}
 
 

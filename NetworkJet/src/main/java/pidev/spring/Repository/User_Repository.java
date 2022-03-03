@@ -27,7 +27,8 @@ public interface User_Repository extends JpaRepository<User, Long> {
 
 	Optional<User> findByLastNameIgnoreCase(String lastName);
 	
-	
+	@Query("select u.actif FROM User as u where u.email =:email")
+	boolean isActif(@Param("email") String email);
 	
 	@Transactional
 	@Modifying
@@ -59,9 +60,7 @@ public interface User_Repository extends JpaRepository<User, Long> {
 	Boolean existsByFirstName(String firstName);
 
 	Boolean existsByEmail(String email);
-	
 
-	
 
 	
 	

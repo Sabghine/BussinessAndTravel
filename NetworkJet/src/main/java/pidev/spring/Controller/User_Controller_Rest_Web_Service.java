@@ -115,7 +115,7 @@ public class User_Controller_Rest_Web_Service {
         
             SecurityContextHolder.getContext().setAuthentication(authentication);
             
-            // generate Jwt  Token
+          
             String jwt = jwtUtils.generateJwtToken(authentication);
             
             
@@ -175,7 +175,7 @@ public class User_Controller_Rest_Web_Service {
         user.setDate(signUpRequest.getDate());
         user.setCreatedTime(new Date());
         Jpa_User_Repository.save(user);
-        /*yetb3ath email*/
+      
   
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
@@ -209,6 +209,7 @@ public class User_Controller_Rest_Web_Service {
     }
 
     /* Get user by his identify */
+    @Secured(value = {"ROLE_ADMIN"})
     @GetMapping("/retrieve-user/{user-id}")
     public Optional<User> retrieveUserById(@PathVariable("user-id") Long userId, HttpServletRequest request,
                                                HttpServletResponse response) throws UserPrincipalNotFoundException {
@@ -239,40 +240,16 @@ public class User_Controller_Rest_Web_Service {
                              BindingResult bindingResult) {
         User userToUpdate = Jpa_User_Repository.findById(id).orElse(null);
 
-        String lastName = user.getLastName();
-        userToUpdate.setLastName(lastName);
-        String firstname = user.getFirstName();
-        userToUpdate.setFirstName(firstname);
+        
+        userToUpdate.setLastName(user.getLastName());
+        userToUpdate.setFirstName(user.getFirstName());
         Date date = user.getDate();
         userToUpdate.setDate(date);
-        boolean actif = user.isActif();
-        userToUpdate.setActif(actif);
+        userToUpdate.setActif(true);
         if (user.getRole() == null) {
             userToUpdate.setRole(userToUpdate.getRole());
         }
-        Map<String, Object> Errors = new HashMap<>();
-
-
-        Optional<User> existingUserWithFirstName = Jpa_User_Repository
-                .findByFirstNameIgnoreCase(user.getFirstName());
-        Optional<User> existingUserWithLastName = Jpa_User_Repository
-                .findByLastNameIgnoreCase(user.getLastName());
-
-        if (existingUserWithFirstName.isPresent()) {
-
-            Errors.put("Errors : this First Name is already exist please choose another one !", true);
-            for (FieldError fe : bindingResult.getFieldErrors()) {
-                Errors.put(fe.getField(), fe.getDefaultMessage());
-            }
-            return Errors;
-        } else if (existingUserWithLastName.isPresent()) {
-
-            Errors.put("Errors : this Last Name is already exist please choose another one !", true);
-            for (FieldError fe : bindingResult.getFieldErrors()) {
-                Errors.put(fe.getField(), fe.getDefaultMessage());
-            }
-            return Errors;
-        }
+        
 
         return Jpa_User_Repository.save(userToUpdate);
 

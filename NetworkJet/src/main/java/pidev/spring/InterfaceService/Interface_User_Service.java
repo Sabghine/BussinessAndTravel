@@ -17,7 +17,7 @@ public interface Interface_User_Service {
 
 	Optional<User> findById(Long id);
 
-	String deleteById(Long id);
+	void deleteById(Long id);
 
 	Long FindIDUserByEmail(String email);
 

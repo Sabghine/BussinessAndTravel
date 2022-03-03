@@ -15,5 +15,5 @@ public interface Interface_User_Role_Service {
 
 	 Optional<Role> findById(Long id);
 
-	 String deleteById(Long id);
+	 void deleteById(Long id);
 }

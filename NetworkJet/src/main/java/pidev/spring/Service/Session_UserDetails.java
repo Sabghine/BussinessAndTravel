@@ -13,11 +13,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import pidev.spring.entities.User;
 
 public class Session_UserDetails implements UserDetails {
-	/*
-	 * it is a Session_UserDetails class which implements theUserDetails
-	 * interface: it therefore implements the methods returning information
-	 * about the user
-	 */
+
 	private Long id;
 
 	private String username;
@@ -30,16 +26,12 @@ public class Session_UserDetails implements UserDetails {
 		this.user = user;
 	}
 
-	/**
-	 * @return the user
-	 */
+	
 	public User getUser() {
 		return user;
 	}
 
-	/**
-	 * @param user the user to set
-	 */
+	
 	public void setUser(User user) {
 		this.user = user;
 	}
@@ -50,9 +42,6 @@ public class Session_UserDetails implements UserDetails {
 
 	private Collection<? extends GrantedAuthority> authorities;
 
-	/**
-	 * @return the authorities
-	 */
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return authorities;
 	}

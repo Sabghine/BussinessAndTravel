@@ -2,16 +2,13 @@ package pidev.spring.entities;
 
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,16 +16,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 
 import lombok.AccessLevel;
@@ -76,10 +68,9 @@ public class User implements Serializable {
 	@Column(columnDefinition = "boolean default false")
 	 boolean actif;
 
-	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
 	@Column(name = "User_Birthday_Date")
 	@Temporal(TemporalType.DATE)
-	 Date date;
+	 Date date=Calendar.getInstance().getTime();;
 
 	@NotNull
 	@Column(name = "User_Email")
@@ -101,8 +92,6 @@ public class User implements Serializable {
 
 	@Column(name = "Last_Logged_out", updatable = false)
 	 Date lastLoggedOut;
-
-
 
 	@Column(name = "Last_Session_Id_Generated")
 	 String Session_Id;

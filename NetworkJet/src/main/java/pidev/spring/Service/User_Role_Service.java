@@ -3,7 +3,6 @@ package pidev.spring.Service;
 import java.util.Collection;
 import java.util.Optional;
 
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,18 +40,10 @@ public class User_Role_Service implements Interface_User_Role_Service{
  
 
 	@Override
-	public String deleteById(Long id) {
-		JSONObject jsonObject = new JSONObject();
-		try {
-			role_Repository.deleteById(id);
-			jsonObject.put("message", "User deleted successfully ");
+	public void deleteById(Long id) {
 			
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-		return jsonObject.toString();
+	
+		 role_Repository.deleteById(id);
 	}
 
 	@Override

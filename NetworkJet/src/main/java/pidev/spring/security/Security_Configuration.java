@@ -26,7 +26,7 @@ import pidev.spring.Service.User_Details_Service_Impl;
 @EnableGlobalMethodSecurity(securedEnabled = true, jsr250Enabled = true, prePostEnabled = true)
 @Configuration
 @EnableWebSecurity
-@EnableWebMvc
+@EnableWebMvc  
 public class Security_Configuration extends WebSecurityConfigurerAdapter {
 	/*
 	  securedEnabled = true: activate the annotation @Secured
@@ -46,9 +46,7 @@ public class Security_Configuration extends WebSecurityConfigurerAdapter {
 	 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());// Authentication
-																									// Bean
-																									// Configuration
+		auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
 
 	}
 
@@ -58,13 +56,9 @@ public class Security_Configuration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable() .authorizeRequests().antMatchers( "/retrieve-all-users","/generate","/Sign-In" , "/Sign-Up" ,  "/oauth2/**" , "/all" , "/deleteCron", "/login").permitAll();
 
-				 
+				  
 
-				
-				 /*
-								 * The first instruction allows access to the
-								 * roads
-								 */
+			
 
 			http.authorizeRequests().anyRequest().authenticated().and().formLogin().loginPage("/login").permitAll()
 				/*
