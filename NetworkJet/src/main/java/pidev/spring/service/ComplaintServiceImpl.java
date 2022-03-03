@@ -116,26 +116,15 @@ public class ComplaintServiceImpl implements IComplaint{
 
      msg.setFrom("sabrine.networkjet@gmail.com");
      msg.setTo(u.getEmail());
-     msg.setSubject("Reclamation inconnue");
-     msg.setText("svp veuillez verifier cette reclamation");
+     msg.setSubject("Employee en retard");
+     msg.setText(" email envoyé lors de test des metiers pidev  ");
 
       this.sender.send(msg);
     }
 	
 		
 	}
-	
-	
-	
 
-	//@Override
-	//public List<Complaint> SearchComplaint() {
-	//	List<Complaint> com=(List<Complaint>)complaintRepository.retrieveAllComplaintsByStatut("grave");
-		//for(Complaint complaint:com) {
-		
-	//}
-		//return com;
-	//}
 
 	
 	

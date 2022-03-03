@@ -95,13 +95,7 @@ public class ComplaintRestController {
 			}
 		 
 		 
-		 
-		 //@GetMapping("/recherche")
-		 // @ResponseBody
-		// public List<Complaint> SearchComp() {
-			//  List<Complaint> list  =complaintService.SearchComplaint();
-			//return list;
-		 //  }
+		
 
 	}
 
