@@ -1,6 +1,5 @@
 package pidev.spring.entities;
 
-
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
@@ -9,6 +8,8 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -47,68 +48,68 @@ public class User implements Serializable {
 	 */
 
 	/*
-	This's a simple check for last commit
+	 * This's a simple check for last commit
 	 */
 	private static final long serialVersionUID = 1L;
 	/*-----------------------****Bean_Attributes****-------------------------------------*/
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "User_id")
-	 Long id;
+	Long id;
 
 	@NotNull
 	@Column(name = "User_First_Name")
-	 String firstName;
+	String firstName;
 
 	@NotNull
 	@Column(name = "User_Last_Name")
-	 String lastName;
+	String lastName;
 
 	@NotNull
 	@Column(columnDefinition = "boolean default false")
-	 boolean actif;
+	boolean actif;
 
 	@Column(name = "User_Birthday_Date")
 	@Temporal(TemporalType.DATE)
-	 Date date=Calendar.getInstance().getTime();;
+	Date date = Calendar.getInstance().getTime();;
 
 	@NotNull
 	@Column(name = "User_Email")
-	 String email;
+	String email;
 
 	@NotNull
 	@Column(name = "User_Password")
-	 String password;
+	String password;
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-	 Set<Role> role = new HashSet<>();
+	Set<Role> role = new HashSet<>();
 
 	@Column(name = "created_time", updatable = false)
-	 Date createdTime;
+	Date createdTime;
 
 	@Column(name = "Last_Logged_In", updatable = false)
-	 Date lastLoggedIn;
+	Date lastLoggedIn;
 
 	@Column(name = "Last_Logged_out", updatable = false)
-	 Date lastLoggedOut;
+	Date lastLoggedOut;
 
 	@Column(name = "Last_Session_Id_Generated")
-	 String Session_Id;
+	String Session_Id;
 
 	@Column(name = "account_non_locked")
-	 boolean accountNonLocked;
+	boolean accountNonLocked;
 
 	@Column(name = "failed_attempt")
-	 int failedAttempt;
+	int failedAttempt;
 
 	@Column(name = "lock_time")
-	 Date lockTime;
+	Date lockTime;
+	@Enumerated(EnumType.STRING)
+	Domaine domaine;
+	@OneToOne
+	Invitation invitation;
 
-@OneToOne
-Invitation invitation;
-	
-	
 	public User(String email, String firstName, String lastName, boolean actif, Date date, String password) {
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -117,12 +118,8 @@ Invitation invitation;
 		this.password = password;
 	}
 
-
-
-
 	public String getFullName() {
 		return getFirstName() + " " + getLastName();
 	}
-
 
 }

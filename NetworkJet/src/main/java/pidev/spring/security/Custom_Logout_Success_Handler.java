@@ -16,8 +16,8 @@ import org.springframework.security.web.authentication.logout.LogoutSuccessHandl
 import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler;
 
 import lombok.extern.slf4j.Slf4j;
-import pidev.spring.Repository.User_Repository;
-import pidev.spring.Service.User_Service;
+import pidev.spring.repository.User_Repository;
+import pidev.spring.service.User_Service;
 @Slf4j
 public class Custom_Logout_Success_Handler extends SimpleUrlLogoutSuccessHandler implements LogoutSuccessHandler {
 

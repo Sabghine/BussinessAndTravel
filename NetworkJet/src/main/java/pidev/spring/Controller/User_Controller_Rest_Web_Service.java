@@ -1,13 +1,11 @@
-package pidev.spring.Controller;
+package pidev.spring.controller;
 
 
 import java.io.UnsupportedEncodingException;
 import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -28,7 +26,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,10 +38,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.slf4j.Slf4j;
 import pidev.spring.Exeption.API_Request_Exception_NotFound;
-import pidev.spring.Repository.Role_Repository;
-import pidev.spring.Repository.User_Repository;
-import pidev.spring.Service.Session_UserDetails;
-import pidev.spring.Service.User_Service;
+import pidev.spring.entities.Domaine;
 import pidev.spring.entities.ERole;
 import pidev.spring.entities.Role;
 import pidev.spring.entities.User;
@@ -52,7 +46,11 @@ import pidev.spring.entities.RequestApiForm.JwtResponse;
 import pidev.spring.entities.RequestApiForm.MessageResponse;
 import pidev.spring.entities.RequestApiForm.RequestLogin;
 import pidev.spring.entities.RequestApiForm.SignupRequest;
+import pidev.spring.repository.Role_Repository;
+import pidev.spring.repository.User_Repository;
 import pidev.spring.security.JwtUtils;
+import pidev.spring.service.Session_UserDetails;
+import pidev.spring.service.User_Service;
 @Slf4j
 @SuppressWarnings("ALL")
 @CrossOrigin("*")
@@ -254,24 +252,30 @@ public class User_Controller_Rest_Web_Service {
         return Jpa_User_Repository.save(userToUpdate);
 
     }
-  /*  @PutMapping("/ajouterVoyage")
- void ajouter_voyage(Voyage v,Authentication auth)
+    @GetMapping("/stat")
+    ResponseEntity<?> StatistiqueSelonDomaine(Authentication auth)
     {
-        Session_UserDetails userDetails = (Session_UserDetails) auth.getPrincipal();
-        
-        
-        User u=Jpa_User_Repository.getById(userDetails.getId());
-        
-        v.setUser(u);
-        
-    	
-    }*/
+    	SecurityContextHolder.getContext().setAuthentication(auth);
+		Session_UserDetails userDetails = (Session_UserDetails) auth.getPrincipal();
+    	return 	I_User_Service.StatistiqueSelonDomaine(userDetails.getId());
+    }
+    
+    @GetMapping("/filter")
+    public ResponseEntity<?> filter(Authentication auth,@RequestBody String filter)
+    {
+    	SecurityContextHolder.getContext().setAuthentication(auth);
+		Session_UserDetails userDetails = (Session_UserDetails) auth.getPrincipal();
+    	return I_User_Service.filter(filter,userDetails.getId());
+    }
     
     
+    public List<User> searchMultiCriteria(HttpServletRequest request){
+    		
+    		String name=""; String email=""; boolean actif=false; String domaine = "";
     
-    
-    
-    
+
+    	return I_User_Service.searchMultiCriteria(name, email, actif, Domaine.valueOf(domaine));
+    }
 
     
     

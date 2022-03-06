@@ -12,8 +12,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import lombok.extern.slf4j.Slf4j;
-import pidev.spring.Repository.User_Repository;
-import pidev.spring.Service.User_Service;
+import pidev.spring.repository.User_Repository;
+import pidev.spring.service.User_Service;
 @Slf4j
 @Component
 public class Before_Session_Destroyed implements ApplicationListener<SessionDestroyedEvent> {

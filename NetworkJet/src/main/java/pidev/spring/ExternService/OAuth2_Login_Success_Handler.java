@@ -12,9 +12,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
-import pidev.spring.Repository.User_Repository;
-import pidev.spring.Service.User_Service;
 import pidev.spring.entities.User;
+import pidev.spring.repository.User_Repository;
+import pidev.spring.service.User_Service;
 
 
 

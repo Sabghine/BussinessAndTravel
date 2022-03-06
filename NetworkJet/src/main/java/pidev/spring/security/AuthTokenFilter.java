@@ -15,7 +15,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import pidev.spring.Service.User_Details_Service_Impl;
+import pidev.spring.service.User_Details_Service_Impl;
 
 public class AuthTokenFilter extends OncePerRequestFilter  {
 

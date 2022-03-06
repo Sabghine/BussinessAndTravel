@@ -15,7 +15,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.UnsupportedJwtException;
 import lombok.extern.slf4j.Slf4j;
-import pidev.spring.Service.Session_UserDetails;
+import pidev.spring.service.Session_UserDetails;
 
 @Component
 @Slf4j

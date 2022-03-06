@@ -1,6 +1,7 @@
-package pidev.spring.Repository;
+package pidev.spring.repository;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,6 +11,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import pidev.spring.entities.Domaine;
 import pidev.spring.entities.User;
  
 @Repository
@@ -60,8 +62,17 @@ public interface User_Repository extends JpaRepository<User, Long> {
 	Boolean existsByFirstName(String firstName);
 
 	Boolean existsByEmail(String email);
+	
+	
+	//Statistique selon domaine 
+	@Query("SELECT COUNT(*) FROM User")
+	int  countalluser();
+	@Query("select  count(u) from User u where u.domaine LIKE CONCAT('%',:dom,'%')" )
+	int  countdomaine(@Param("dom") String dom);
+	
 
-
+	 @Query("select u from User u where lower(u.firstName) like lower(concat('%', :filter,'%'))")
+	    public List<User> findByFilter(@Param("filter") String filter);
 	
 	
 

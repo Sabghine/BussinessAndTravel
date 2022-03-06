@@ -1,4 +1,4 @@
-package pidev.spring.Repository;
+package pidev.spring.repository;
 
 import java.util.Optional;
 
