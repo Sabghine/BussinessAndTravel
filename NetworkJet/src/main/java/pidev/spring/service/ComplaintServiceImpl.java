@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import pidev.spring.entities.Complaint;
@@ -112,10 +113,23 @@ public class  ComplaintServiceImpl implements IComplaint{
 	     
 	     this.sender.send(msg);
 	     
+	}
+	     
+	     @Scheduled(cron="*/30 * * * * *")
+	 	public void nbreComplaintsByStatusComplaints(){
+	 		int nbrGrave=complaintRepository.getComplaintsByStatusComplaints(StatusComplaints.grave);
+	 		int nbrMoyenne=complaintRepository.getComplaintsByStatusComplaints(StatusComplaints.moyenne);
+	 		int nbrFaible=complaintRepository.getComplaintsByStatusComplaints(StatusComplaints.faible);
+	 		System.out.println("Nombre des réclamations grave:"+nbrGrave);
+	 		System.out.println("nombre des Reclamations moyenne:"+nbrMoyenne);
+	 		System.out.println("nombre des Reclamations faible:"+nbrFaible);
+	 		
+	 	}
+	     
 	     
 	     
 	    
 		
 	}
 
-}
+
