@@ -21,6 +21,9 @@ import org.springframework.mail.MailSender;
 @Service
 public class  ComplaintServiceImpl implements IComplaint{
 	
+	
+	@Autowired
+    private MailSender sender;
 
 	@Autowired
 	ComplaintRepository complaintRepository;
@@ -106,6 +109,8 @@ public class  ComplaintServiceImpl implements IComplaint{
 	     msg.setTo(u.getEmail());
 	     msg.setSubject("Employee en retard");
 	     msg.setText(" email envoyé lors de test des metiers pidev  ");
+	     
+	     this.sender.send(msg);
 	     
 	     
 	     
