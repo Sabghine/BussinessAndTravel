@@ -107,8 +107,8 @@ public class User implements Serializable {
 	Date lockTime;
 	@Enumerated(EnumType.STRING)
 	Domaine domaine;
-	@OneToOne
-	Invitation invitation;
+	//@OneToOne
+	//Invitation invitation;
 
 	public User(String email, String firstName, String lastName, boolean actif, Date date, String password) {
 		this.firstName = firstName;

@@ -14,6 +14,6 @@ public class Invitation implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	Long id;
-@OneToOne(mappedBy = "invitation")
-User user;
+  //@OneToOne(mappedBy = "invitation")
+//  User user;
 }
