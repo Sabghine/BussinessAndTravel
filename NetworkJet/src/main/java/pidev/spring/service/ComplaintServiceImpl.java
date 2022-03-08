@@ -7,16 +7,17 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import pidev.spring.entities.Complaint;
+import pidev.spring.entities.ERole;
 import pidev.spring.entities.StatusComplaints;
 import pidev.spring.entities.User;
 import pidev.spring.repository.ComplaintRepository;
 import pidev.spring.repository.User_Repository;
-import org.springframework.mail.MailSender;
 
 
 @Service
@@ -38,10 +39,24 @@ public class  ComplaintServiceImpl implements IComplaint{
 	}
 
 	@Override
-	public Complaint addComplaint(Complaint c) {
+	public Complaint addComplaint(Complaint c,Long userid) {
+		User user = userRepository.findById(userid).orElse(null);
+		
+		if (user.getRole().stream().anyMatch(e -> e.getName().equals(ERole.ROLE_EMPLOYEE))) {
+		
+
 		Date dateComplaint = new Date();
 		c.setDateComplaint(dateComplaint);
+		c.setUser(user);
+		
+		
 		return complaintRepository.save(c);
+		}
+		else
+		{
+			return null;
+		}
+		
 	}
 
 	@Override

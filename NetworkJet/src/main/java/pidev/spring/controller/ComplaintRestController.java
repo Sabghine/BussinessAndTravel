@@ -3,6 +3,8 @@ package pidev.spring.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import pidev.spring.entities.Complaint;
 import pidev.spring.entities.StatusComplaints;
 import pidev.spring.service.IComplaint;
+import pidev.spring.service.Session_UserDetails;
 
 
 @RestController
@@ -48,8 +51,10 @@ public class ComplaintRestController {
 		// http://localhost:8080/complaint/add
 		@PostMapping("/add")
 		@ResponseBody
-		public Complaint addComplaint(@RequestBody Complaint c) {
-			return complaintService.addComplaint(c);
+		public Complaint addComplaint(Authentication auth,@RequestBody Complaint c) {
+		   	SecurityContextHolder.getContext().setAuthentication(auth);
+			Session_UserDetails userDetails = (Session_UserDetails) auth.getPrincipal();
+			return complaintService.addComplaint(c,userDetails.getId());
 			 
 		}
 
@@ -67,6 +72,7 @@ public class ComplaintRestController {
 		public void deleteComplaint(@PathVariable("id") Long complaintId) {
 			complaintService.deleteComplaint(complaintId);
 		}
+		
 		
 		@GetMapping ("/ComplaintToday")
 		@ResponseBody

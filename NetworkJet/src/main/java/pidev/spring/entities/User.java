@@ -131,5 +131,26 @@ public class User implements Serializable {
 	public String getFullName() {
 		return getFirstName() + " " + getLastName();
 	}
-
+//	@OneToMany(mappedBy="user")
+//	private List<Post> posts;
+//	
+//	@OneToMany
+//	private List<Post> likedPosts;
+//	
+//	@OneToMany
+//	@JsonIgnore
+//	private List<Post> dislikedPosts;
+//	
+//	@OneToMany
+//	@JsonIgnore
+//	private List<Post> likedComments;
+//	
+//	@OneToMany
+//	@JsonIgnore
+//	private List<Post> dislikedComments;
+//	
+//	@OneToMany(mappedBy = "user")
+//	@JsonIgnore
+//	private Set<Reaction> reacts;
 }
+

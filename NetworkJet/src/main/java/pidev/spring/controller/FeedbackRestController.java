@@ -3,6 +3,8 @@ package pidev.spring.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import pidev.spring.entities.Feedback;
 import pidev.spring.service.IFeedback;
+import pidev.spring.service.Session_UserDetails;
 
 @RestController
 @RequestMapping("feedback")
@@ -41,8 +44,10 @@ public class FeedbackRestController {
 		//http://localhost:8080/feedback/add
 		@PostMapping("/add")
 		@ResponseBody
-		public Feedback addFeedback(@RequestBody Feedback f) {
-			return feedbackService.addFeeback(f);
+		public Feedback addFeedback(Authentication auth,@RequestBody Feedback f) {
+			SecurityContextHolder.getContext().setAuthentication(auth);
+			Session_UserDetails userDetails = (Session_UserDetails) auth.getPrincipal();
+			return feedbackService.addFeeback(f,userDetails.getId());
 			
 		}
 		

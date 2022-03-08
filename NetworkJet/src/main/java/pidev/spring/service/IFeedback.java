@@ -10,7 +10,7 @@ public interface IFeedback {
 	
 	List<Feedback> retrieveAllFeedbacks();
 
-	Feedback addFeeback(Feedback f);
+	Feedback addFeeback(Feedback f,Long userid);
 
 	@Transactional
 	void deleteFeedback(Long id);
