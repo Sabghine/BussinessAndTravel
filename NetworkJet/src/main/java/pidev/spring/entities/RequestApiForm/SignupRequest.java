@@ -3,9 +3,13 @@ package pidev.spring.entities.RequestApiForm;
 import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
+import pidev.spring.entities.Domaine;
 
 public class SignupRequest {
 
@@ -28,19 +32,14 @@ public class SignupRequest {
 	private String lastName;
 	private Date date;
 
-	/**
-	 * @return the date
-	 */
+
+	
 	public Date getDate() {
 		return date;
 	}
 
 
 
-	/**
-	 * @param date
-	 *            the date to set
-	 */
 	public void setDate(Date date) {
 		this.date = date;
 	}
@@ -69,34 +68,24 @@ public class SignupRequest {
 		this.role = role;
 	}
 
-	/**
-	 * @return the firstName
-	 */
+	
 	public String getFirstName() {
 		return firstName;
 	}
 
-	/**
-	 * @param firstName
-	 *            the firstName to set
-	 */
+
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 
-	/**
-	 * @return the lastName
-	 */
+	
 	public String getLastName() {
 		return lastName;
 	}
 
-	/**
-	 * @param lastName
-	 *            the lastName to set
-	 */
+	
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-
+ 
 }

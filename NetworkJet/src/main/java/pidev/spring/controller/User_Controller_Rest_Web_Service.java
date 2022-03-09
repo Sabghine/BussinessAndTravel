@@ -88,7 +88,7 @@ public class User_Controller_Rest_Web_Service {
     }
 
 
-    /* Authentication API */
+   
     
     @RequestMapping("/Sign-In")
     public ResponseEntity<?> authenticateUser(  @RequestBody RequestLogin loginRequest, HttpServletRequest request,
@@ -145,7 +145,7 @@ public class User_Controller_Rest_Web_Service {
    
 
    
-    /* REGISTRATION */
+   
     @RequestMapping("/Sign-Up")
     public ResponseEntity<?> add_user(@Valid @RequestBody SignupRequest signUpRequest) {
 
@@ -157,7 +157,7 @@ public class User_Controller_Rest_Web_Service {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
         }
 
-        // Create new user's account
+        
         User user = new User(signUpRequest.getEmail(), signUpRequest.getFirstName(),
                 signUpRequest.getLastName(), false, signUpRequest.getDate(),
                 passwordEncoder.encode(signUpRequest.getPassword()));
@@ -180,8 +180,7 @@ public class User_Controller_Rest_Web_Service {
     }
 
     
-    /* END REGISTRATION */
-    /* Logged out API */
+   
     @PostMapping("/log-out")
     public ResponseEntity<?> logout(HttpSession session, Authentication auth, HttpServletRequest request) {
         log.info("Before logout");
@@ -199,7 +198,7 @@ public class User_Controller_Rest_Web_Service {
 
 
 
-    /* Get all the users */
+   
     @Secured(value = {"ROLE_ADMIN"})
     @GetMapping("/retrieve-all-users")
     public List<User> getUsers() {
@@ -207,7 +206,7 @@ public class User_Controller_Rest_Web_Service {
         return list;
     }
 
-    /* Get user by his identify */
+    
     @Secured(value = {"ROLE_ADMIN"})
     @GetMapping("/retrieve-user/{user-id}")
     public Optional<User> retrieveUserById(@PathVariable("user-id") Long userId, HttpServletRequest request,
@@ -218,10 +217,7 @@ public class User_Controller_Rest_Web_Service {
         return I_User_Service.findById(userId);
     }
 
-    /*
-     * Delete user by identify Only user with role ADMIN is authorized to use
-     * this API
-     */
+    
     @Secured(value = {"ROLE_ADMIN"})
     @DeleteMapping("/remove-user/{user-id}")
     public void removeUser(@PathVariable("user-id") Long userId) {
@@ -232,7 +228,7 @@ public class User_Controller_Rest_Web_Service {
         Jpa_User_Repository.deleteById(userId);
     }
 
-    /* update account Only user with role ADMIN is authorized to use this API */
+   
     @Secured(value = {"ROLE_ADMIN"})
     @PutMapping("/updateUser/{user-id}")
     public Object updateUser(@RequestBody User user, @PathVariable("user-id") Long id,
