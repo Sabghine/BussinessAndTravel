@@ -4,7 +4,7 @@ import pidev.spring.entities.BadWord;
 
 public interface BadWordService {
 	
-	 BadWord addBadWord(BadWord badWord);
+	 public BadWord addBadWord(BadWord badWord);
 
 
 }

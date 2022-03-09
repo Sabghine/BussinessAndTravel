@@ -6,19 +6,48 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import pidev.spring.entities.Comment;
+import pidev.spring.entities.ERole;
+import pidev.spring.entities.Post;
+import pidev.spring.entities.Reaction;
 import pidev.spring.entities.User;
 import pidev.spring.repository.CommentRepository;
+import pidev.spring.repository.PostRepository;
+import pidev.spring.repository.ReactionRepository;
+import pidev.spring.repository.User_Repository;
+
 @Service
 public class CommentServiceImpl implements CommentService{
 	@Autowired
 	private CommentRepository commentRepository;
+	@Autowired
+	User_Repository user_Repository ;
+	@Autowired
+	ReactionRepository reactionRepository;
+	@Autowired
+	PostRepository postRepository ;
 
 	@Override
-	public Comment addComment(Comment comment) {
+	public String addComment(Comment comment, int idPost, Long userid) {
 		
+		Post post = postRepository.findById(idPost).orElse(null);
+		comment.setPost(post);
+		 User user = user_Repository.findById(userid).orElse(null);
+			
+			if (user.getRole().stream().anyMatch(e -> e.getName().equals(ERole.ROLE_USER))) {
+				
+				post.setUser(user);
+	
+			commentRepository.save(comment);
+			
+			return "Comment added  succesfuly";
+			}
+			else {
+				return null;
+			}
+		}
 		
-		 return commentRepository.save(comment);		
-	}
+
+	
 
 	
 
@@ -51,28 +80,49 @@ public class CommentServiceImpl implements CommentService{
 		return found;
 	}
 
-	/*@Override
-	public void addlikesComment(int idComment, Long id) {
-		Comment  comment  = commentRepository.findById(idComment).get();
-	    User user = userRepository.findById(id).get();
+	@Override
+	public Comment addlikesComment(Comment comment ,int idComment, Long userid) {
+		
+		User user = user_Repository.findById(userid).orElse(null);
+		 
+	if (user.getRole().stream().anyMatch(e -> e.getName().equals(ERole.ROLE_USER))) {
+		Comment  comment1  = commentRepository.findById(idComment).get();
 	    Reaction react = new Reaction();
-	    react.setComments(comment);
+	    react.setComments(comment1);
 	    react.setUser(user);
-	    react.setType("like");
-	    comment.setLikes(comment.getLikes()+1);
-	    commentRepository.save(comment);
-	    reactionRepository.save(react)		
-	}*/
-/*@Override
-public void addDilikesComment(int idComment, Long id) {
-	  	Comment  comment  = commentRepository.findById(idComment).get();
-	    User user = userRepository.findById(id).get();
-	    Reaction react = new Reaction();
-	    react.setComments(comment);
-	    react.setUser(user);
-	    react.setType("Dilikes");
-	    comment.setDislikes(comment.getDislikes()+1);
-	    commentRepository.save(comment);
-	    reactionRepository.save(react);		
-}*/
+	    react.setType("likes");
+	    comment1.setLikes(comment1.getLikes()+1);
+	    commentRepository.save(comment1);
+	    reactionRepository.save(react);
+	
+    	
+	}
+			else { 
+				return null ;
+				}
+	return comment;
+			}
+			
+
+	@Override
+	public Comment addDilikesComment( Comment comment,int idComment, Long userid) {
+		User user = user_Repository.findById(userid).orElse(null);
+		 
+		if (user.getRole().stream().anyMatch(e -> e.getName().equals(ERole.ROLE_USER))) {
+			Comment  comment1  = commentRepository.findById(idComment).get();
+		    Reaction react = new Reaction();
+		    react.setComments(comment1);
+		    react.setUser(user);
+		    react.setType("dislikes");
+		    comment1.setDislikes(comment1.getDislikes()+1);
+		    commentRepository.save(comment1);
+		    reactionRepository.save(react);
+		
+	    	
+		}
+				else { 
+					return null ;
+					}
+		return comment;
+				}
 }

@@ -24,9 +24,9 @@ public class Reaction implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idReaction;
 	private String type;
-//	@JsonIgnore
-//	@ManyToOne
-//	private User user;
+	@JsonIgnore
+	@ManyToOne
+	private User user;
 	@JsonIgnore
 	@ManyToOne
 	private Post post;

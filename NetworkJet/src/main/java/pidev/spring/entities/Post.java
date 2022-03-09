@@ -42,7 +42,8 @@ public class Post implements Serializable {
 	@OneToMany(mappedBy = "post")
 	@JsonIgnore
 	private Set<Reaction> reacts;
-//	@ManyToOne
-//	@JsonIgnore
-//	private User user;
+	
+	@ManyToOne
+	@JsonIgnore
+	private User user;
 }

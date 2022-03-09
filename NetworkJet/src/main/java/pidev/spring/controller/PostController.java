@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +24,7 @@ import pidev.spring.entities.Post;
 import pidev.spring.repository.badwordRepo;
 
 import pidev.spring.service.PostService;
+import pidev.spring.service.Session_UserDetails;
 
 @Controller
 @RequestMapping("/posts")
@@ -32,7 +35,9 @@ public class PostController {
 	private badwordRepo badwordRepo;
 	@PostMapping("/addPost")
 	@ResponseBody
-	public String addPost(@RequestBody Post post) {
+	public String addPost(Authentication auth ,@RequestBody Post post) {
+		SecurityContextHolder.getContext().setAuthentication(auth);
+		Session_UserDetails userDetails = (Session_UserDetails) auth.getPrincipal();
 		String textbody= post.getContent();
 		List<BadWord> badwordlist = badwordRepo.findAll();
 		int compteur=0;
@@ -50,7 +55,7 @@ public class PostController {
 		}
 		else	
 				{
-		return postService.addPost(post) ;
+		return postService.addPost(post,userDetails.getId()) ;
 				}
 	}
 		@PutMapping("/updatePost/{idPost}")
@@ -102,28 +107,34 @@ public class PostController {
 		        List<Post> allProducts = postService.findAllProducts();
 		        return new APIResponse<>(allProducts.size(), allProducts);
 		    }
-		 /*@GetMapping("/findPostsByUser/{idUser}")
+		 @GetMapping("/findPostsByUser/{idUser}")
 		    @ResponseBody
-		    private ResponseEntity findPostsByUser(@PathVariable("idUser") Long idUser) {
+		    private ResponseEntity findPostsByUser(Authentication auth,@PathVariable("idUser") Long idUser) {
+			 SecurityContextHolder.getContext().setAuthentication(auth);
+				Session_UserDetails userDetails = (Session_UserDetails) auth.getPrincipal();
 		    	try {
 		    		return new ResponseEntity(postService.findAllPostsByUser(idUser), HttpStatus.OK);
 		    	}catch(Exception e) {
 		    		return new ResponseEntity(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
 		    	}
 		   
-		    }*/
-		 /*@PostMapping("/addlikes/{idpost}")
+		    }
+		    @PostMapping("/addlikes/{idpost}")
 		    @ResponseBody
-		    public void likepost(@PathVariable("idpost") int idpost)
+		    public void likepost(Authentication auth ,  Post post ,@PathVariable("idpost") int idpost  )
 		    {
-		    	postService.addlikes(idpost, (long) 1);
+			 SecurityContextHolder.getContext().setAuthentication(auth);
+				Session_UserDetails userDetails = (Session_UserDetails) auth.getPrincipal();
+		    	postService.addlikes(post,idpost,userDetails.getId());
 		    }
 		    @PostMapping("/addDislikes/{idpost}")
 		    @ResponseBody
-		    public void dislikepost(@PathVariable("idpost") int idpost)
+		    public void dislikepost(Authentication auth , Post post ,@PathVariable("idpost") int idpost)
 		    {
-		    	postService.addDilikes(idpost, (long) 1);
-		    }*/
+		    	SecurityContextHolder.getContext().setAuthentication(auth);
+				Session_UserDetails userDetails = (Session_UserDetails) auth.getPrincipal();
+		    	postService.addDilikes(post ,idpost,userDetails.getId());
+		    }
 	
 	}
 	

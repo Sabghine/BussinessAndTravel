@@ -7,7 +7,7 @@ import org.springframework.data.domain.Page;
 import pidev.spring.entities.Post;
 
 public interface PostService {
-	String addPost(Post post);
+	String addPost(Post post ,Long userid);
 	String updatePost(Post post);
 	void deletePost(int idPost);
 	List<Post> getAllPosts();
@@ -17,8 +17,8 @@ public interface PostService {
    Page<Post> findPostWithPagination(int offset,int pageSize);
    Page<Post> findPostWithPaginationAndSorting(int offset,int pageSize,String field);
    List<Post> findAllProducts();
-   //List<Post> findAllPostsByUser(Long idUser);
- // void addlikes(int idPost , Long id);
-   //void addDilikes(int idPost , Long id);
+   List<Post> findAllPostsByUser(Long idUser);
+  Post addlikes(Post post, int idPost , Long userid);
+   Post addDilikes(Post post,int idPost , Long userid);
 
 }

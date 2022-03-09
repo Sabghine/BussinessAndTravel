@@ -1,5 +1,6 @@
 package pidev.spring.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,9 +8,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import pidev.spring.entities.ERole;
 import pidev.spring.entities.Post;
+import pidev.spring.entities.Reaction;
+import pidev.spring.entities.User;
 import pidev.spring.repository.PostRepository;
 import pidev.spring.repository.ReactionRepository;
+import pidev.spring.repository.User_Repository;
 import pidev.spring.repository.badwordRepo;
 @Service
 public class PostServiceImpl implements PostService {
@@ -21,6 +26,8 @@ public class PostServiceImpl implements PostService {
 	private ReactionRepository reactionRepository;
 	@Autowired
 	private badwordRepo badwordRepo;
+	@Autowired 
+	 User_Repository  user_Repository ;
 
 
 
@@ -86,9 +93,10 @@ public class PostServiceImpl implements PostService {
 		return postRepository.findAll();
 	}
 
-	/*@Override
-	public List<Post> findAllPostsByUser(Long idUser) {
-		User user = userRepository.findById(idUser).get();		
+	@Override
+	public List<Post> findAllPostsByUser(Long userid) {
+		User user = user_Repository.findById(userid).get();	
+		if (user.getRole().stream().anyMatch(e -> e.getName().equals(ERole.ROLE_USER))) {
 		List<Post> posts = new ArrayList<Post>();
 		List<Post> LikedPostsSorted = user.getLikedPosts();
 		List<Post> LikedCommentsSorted = user.getLikedComments();
@@ -105,42 +113,82 @@ public class PostServiceImpl implements PostService {
 		posts.addAll(DislikedCommentsSorted);
 		
 		return posts;
-	}*/
-	/*@Override
-	public void addlikes(int idPost, Long id) {
-    Post  post  = postRepository.findById(idPost).get();
-    User user = userRepository.findById(id).get();
+		}
+		else 
+		{
+			return null;
+		}
+	}
+	@Override
+	public Post addlikes(Post post ,int idPost, Long userid) {
+		
+		User user = user_Repository.findById(userid).orElse(null);
+		 
+	if (user.getRole().stream().anyMatch(e -> e.getName().equals(ERole.ROLE_USER))) {
+    Post  post1  = postRepository.findById(idPost).get();
     Reaction react = new Reaction();
-    react.setPost(post);
+    react.setPost(post1);
     react.setUser(user);
     react.setType("like");
-    post.setLikes(post.getLikes()+1);
-    postRepository.save(post);
+    post1.setLikes(post1.getLikes()+1);
+    postRepository.save(post1);
     reactionRepository.save(react);
-    	
-	}*/
+	post1.setUser(user);
 
-	/*@Override
-	public void addDilikes(int idPost, Long id) {
-	    Post  post  = postRepository.findById(idPost).get();
-	    User user = userRepository.findById(id).get();
-	    Reaction react = new Reaction();
-	    react.setPost(post);
-	    react.setUser(user);
-	    react.setType("Dilikes");
-	    post.setDislikes(post.getDislikes()+1);
-	    postRepository.save(post);
-	    reactionRepository.save(react);
-		
-	}*/
+    	
+	}
+			else { 
+				return null ;
+				}
+	return post;
+			}
+			
 
 	@Override
-	public String addPost(Post post) {
+	public Post addDilikes( Post post,int idPost, Long userid) {
+       User user = user_Repository.findById(userid).orElse(null);
+		
+		if (user.getRole().stream().anyMatch(e -> e.getName().equals(ERole.ROLE_USER))) {
+			
+		Post  post1  = postRepository.findById(idPost).get();
+	    Reaction react = new Reaction();
+	    react.setPost(post1);
+	    react.setUser(user);
+	    react.setType("Dilikes");
+	    post1.setDislikes(post1.getDislikes()+1);
+	    postRepository.save(post1);
+	    reactionRepository.save(react);
+		post1.setUser(user);
+
+		}
+	    else
+	    {
+	    	return null  ;
+	    }
+		return (post);
+		
+		
+	}
+
+	@Override
+	public String addPost(Post post ,Long userid) {
+       User user = user_Repository.findById(userid).orElse(null);
+		
+		if (user.getRole().stream().anyMatch(e -> e.getName().equals(ERole.ROLE_USER))) {
+			
+			post.setUser(user);
+		
+
 		postRepository.save(post);
 		
 		return "post added  succesfuly";
 	}
+		
+		else 
+		{
+			return null ;
 
 	
-
+	}
+}
 }

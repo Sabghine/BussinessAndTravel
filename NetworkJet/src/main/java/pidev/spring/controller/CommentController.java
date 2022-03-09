@@ -5,6 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import pidev.spring.entities.Comment;
+import pidev.spring.entities.Post;
 import pidev.spring.service.CommentService;
+import pidev.spring.service.Session_UserDetails;
 
 @Controller
 @RequestMapping("/comment")
@@ -24,13 +29,16 @@ public class CommentController {
 	@Autowired
 	private CommentService commentService;
 	
-	@PostMapping("/addComment")
+	@PostMapping("/addComment/{idPost}")
     @ResponseBody
-    public Comment addComment(@RequestBody Comment comment)
+    public String addComment( Authentication auth ,@RequestBody Comment comment , @PathVariable("idPost") int idPost )
     
 	{
-		return commentService.addComment(comment);
-		//return new ResponseEntity<>(commentService.addComment(comment), HttpStatus.CREATED) ;
+		SecurityContextHolder.getContext().setAuthentication(auth);
+		Session_UserDetails userDetails = (Session_UserDetails) auth.getPrincipal();
+
+		return commentService.addComment(comment, idPost ,userDetails.getId());
+		
 }
 	@DeleteMapping("/deleteComment/{idComment}")
 	@ResponseBody
@@ -47,17 +55,23 @@ public class CommentController {
 	public Comment ModifyCommentById(@PathVariable("idComment") int idComment,@RequestBody Comment comment) {
 	return commentService.updateCommentById(comment, idComment);
 	}
-	/*@PostMapping("/addDislikes/{idComment}")
+	@PostMapping("/addDislikes/{idComment}")
 	 @ResponseBody
-	    public void dislikeComment(@PathVariable("idComment") int idpost)
+	    public void dislikeComment(Authentication auth , Comment comment ,@PathVariable("idComment") int idComment)
 	    {
-	    	commentService.addDilikesComment(idpost, (long) 1);
+		 SecurityContextHolder.getContext().setAuthentication(auth);
+		 
+			Session_UserDetails userDetails = (Session_UserDetails) auth.getPrincipal();
+	    	commentService.addDilikesComment(comment, idComment, userDetails.getId());
+	    	
 	    }
 
 	 @PostMapping("/addlikes/{idComment}")
 	    @ResponseBody
-	    public void likeComment(@PathVariable("idComment") int idpost)
+	    public void likeComment(Authentication auth , Comment comment ,@PathVariable("idComment") int idComment)
 	    {
-	    	commentService.addlikesComment(idpost, (long) 1);
-	    }*/
+		 SecurityContextHolder.getContext().setAuthentication(auth);
+			Session_UserDetails userDetails = (Session_UserDetails) auth.getPrincipal();
+	    	commentService.addlikesComment(comment, idComment, userDetails.getId());
+	    }
 }
