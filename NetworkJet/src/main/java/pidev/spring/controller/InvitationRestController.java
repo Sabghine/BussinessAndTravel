@@ -54,6 +54,37 @@ public class InvitationRestController {
 	public Invitation updateInvitation(@RequestBody Invitation invitation) {
 	return invitationService.updateInvitation(invitation);
 	}
+	
+	@RequestMapping(value="/Statistics",method = RequestMethod.GET)
+	public String statistiques()
+	{
+		String msg="Taux de Reussite des invitations : "+invitationService.tauxDeReussite()+"%";
+		
+		List<Invitation> listaccepter = invitationService.getAllByStatus(null);
+		List<Invitation> listEnAttente = invitationService.getAllNonAccepted();
+		msg=msg+"\nListe des invitation accepter :"+listaccepter.size()+" invitations \n";
+		for(int i = 0;i<listaccepter.size();i++)
+		{
+			msg=msg+"\n--------------------------------------------------";
+			msg=msg+"\nId :"+listaccepter.get(i).getIdInvitation();
+			msg=msg+"\nemail : "+listaccepter.get(i).getEmail();
+			msg=msg+"\nStatus : Accepted";
+		
+		}
+		msg=msg+"\n--------------------------------------------------";
+		msg=msg+"\n--------------------------------------------------";
+		msg=msg+"\nListe des invitation non accepter encore :"+listEnAttente.size()+" invitations \n";
+		for(int i = 0;i<listEnAttente.size();i++)
+		{
+			msg=msg+"\n--------------------------------------------------";
+			msg=msg+"\nemail : "+listEnAttente.get(i).getEmail();
+			msg=msg+"\nDate d'expiration : "+listEnAttente.get(i).getDate_expiration();
+		}
+		
+		
+		return msg;
+		
+	}
 
 
 

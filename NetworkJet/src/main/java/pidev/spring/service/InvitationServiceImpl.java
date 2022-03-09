@@ -48,4 +48,35 @@ public class InvitationServiceImpl implements InvitationService {
 		 
 	}
 
+	@Override
+	public List<Invitation> getAllByStatus(String token)
+	{
+		return invitationRepository.findByToken(token);
+	}
+	
+	@Override
+	public List<Invitation>getAllNonAccepted()
+	{
+		List<Invitation> liste = invitationRepository.findAll();
+		for(int i = 0; i<liste.size();i++)
+		{
+			if(liste.get(i).getToken()==null)
+			{
+				liste.remove(i);
+			}
+		}
+		return liste;
+	}
+	
+	
+	@Override
+	public float tauxDeReussite()
+	{
+		List<Invitation> total = invitationRepository.findAll();
+		List<Invitation> reussit = invitationRepository.findByToken(null);
+		float sizeR=reussit.size();
+		float sizeT=total.size();
+		float taux = (sizeR/sizeT)*100;
+		return taux;
+	}
 }

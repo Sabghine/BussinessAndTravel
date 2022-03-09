@@ -11,5 +11,8 @@ public interface InvitationService {
 	 void deleteInvitationById(Long id);
 	Invitation getInvitation(Long id);
 	List<Invitation> getAllInvitations();
+	List<Invitation> getAllByStatus(String token);
+	List<Invitation> getAllNonAccepted();
+	float tauxDeReussite();
 
 }
