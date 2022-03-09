@@ -117,30 +117,33 @@ public class User_Service implements Interface_User_Service {
 	}
 	 
 	 
-public List<User> searchMultiCriteria(String name, String email, boolean actif,Domaine domaine) {
+public List<User> searchMultiCriteria(String name, String email,Domaine domaine,String lastname) {
 	
 	
+	List<User> users=retrieveAllUsers();
 	
-			List<User> users=retrieveAllUsers();
-			if (!name.isEmpty()) {
-				users = users.stream().filter(x -> x.getFirstName().toLowerCase().contains(name.toLowerCase()))
-						.collect(Collectors.toList());
-			}
-			if (actif) {
-				users = users.stream().filter(User::isActif).collect(Collectors.toList());
-			}
+	if (!name.isEmpty()) {
+		users = users.stream().filter(x -> x.getFirstName().toLowerCase().contains(name.toLowerCase()))
+				.collect(Collectors.toList());
+	}
+	if (!lastname.isEmpty()) {
+		users = users.stream().filter(x -> x.getLastName().toLowerCase().contains(lastname.toLowerCase()))
+				.collect(Collectors.toList());
+	}
+
+	if (email.isEmpty()){
+		users =  users.stream().filter(x -> x.getEmail().toLowerCase().contains(email.toLowerCase()))
+				.collect(Collectors.toList());
+	}
+	if (domaine != null){
+		users =  users.stream().filter(x -> x.getDomaine().toString().contains(domaine.toString().toLowerCase()))
+				.collect(Collectors.toList());
+	}
+
+	return users;
+
+}
+
 		
-			if (email.isEmpty()){
-				users =  users.stream().filter(x -> x.getEmail().toLowerCase().contains(name.toLowerCase()))
-						.collect(Collectors.toList());
-			}
-			if (domaine != null){
-				users =  users.stream().filter(x -> x.getDomaine().toString().contains(name.toLowerCase()))
-						.collect(Collectors.toList());
-			}
-
-			return users;
-
-		}
 
 }

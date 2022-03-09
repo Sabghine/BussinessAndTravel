@@ -34,6 +34,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.slf4j.Slf4j;
@@ -261,20 +262,21 @@ public class User_Controller_Rest_Web_Service {
     }
     
     @GetMapping("/filter")
-    public ResponseEntity<?> filter(Authentication auth,@RequestBody String filter)
+    public ResponseEntity<?> filter(Authentication auth,@RequestParam String filter)
     {
     	SecurityContextHolder.getContext().setAuthentication(auth);
 		Session_UserDetails userDetails = (Session_UserDetails) auth.getPrincipal();
     	return I_User_Service.filter(filter,userDetails.getId());
     }
     
-    
+    @GetMapping("/searchMultiCriteria")
     public List<User> searchMultiCriteria(HttpServletRequest request){
-    		
-    		String name=""; String email=""; boolean actif=false; String domaine = "";
-    
+            final String lastname = request.getParameter("lastname");
+            final String name = request.getParameter("name");
+            final String email = request.getParameter("email");
+            final String domaine = request.getParameter("domaine");
 
-    	return I_User_Service.searchMultiCriteria(name, email, actif, Domaine.valueOf(domaine));
+    	return I_User_Service.searchMultiCriteria(name, email, Domaine.valueOf(domaine),lastname);
     }
 
     
