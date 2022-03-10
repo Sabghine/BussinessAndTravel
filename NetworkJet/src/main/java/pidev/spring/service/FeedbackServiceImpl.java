@@ -33,7 +33,7 @@ public class FeedbackServiceImpl implements IFeedback {
 		
 		User user = userRepository.findById(userid).orElse(null);
 		
-		if (user.getRole().stream().anyMatch(e -> e.getName().equals(ERole.ROLE_USER))) {
+		if (user.getRole().stream().anyMatch(e -> e.getName().equals(ERole.ROLE_EMPLOYEE))) {
 		Date dateFeedback = new Date();
 		f.setDatefeedback(dateFeedback);
 		f.setUser(user);
@@ -52,11 +52,17 @@ public class FeedbackServiceImpl implements IFeedback {
 	}
 
 	@Override
-	public Feedback updateFeedback(Feedback f , Long id) {
+	public Feedback updateFeedback(Feedback f ,Long id, Long userid) {
+		User user = userRepository.findById(userid).orElse(null);
+		
+		if (user.getRole().stream().anyMatch(e -> e.getName().equals(ERole.ROLE_EMPLOYEE))) {
 		Date dateFeedback = new Date();
 		f.setDatefeedback(dateFeedback);
+		f.setUser(user);
 		f.setId(id);
 		return feedbackRepository.save(f);
+	}
+		else return null;
 	}
 
 	@Override

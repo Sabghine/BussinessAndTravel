@@ -70,8 +70,10 @@ public class ComplaintRestController {
 		// http://localhost:8080/complaint/update-complaint/5
 		@PutMapping("/update/{id}")
 		@ResponseBody
-		public Complaint updateComplaint(@PathVariable("id") Long id, @RequestBody Complaint c) {
-			return complaintService.updateComplaint(c, id);
+		public Complaint updateComplaint(Authentication auth,@PathVariable("id") Long id, @RequestBody Complaint c) {
+			SecurityContextHolder.getContext().setAuthentication(auth);
+			Session_UserDetails userDetails = (Session_UserDetails) auth.getPrincipal();
+			return complaintService.updateComplaint(c,id,userDetails.getId());
 			 
 		}
 

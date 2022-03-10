@@ -16,7 +16,7 @@ public interface IComplaint  {
 	@Transactional
 	void deleteComplaint(Long id);
 
-	Complaint updateComplaint(Complaint c,Long id);
+	Complaint updateComplaint(Complaint c,Long id,Long userid);
 
 	Complaint retrieveComplaint(Long id);
 	

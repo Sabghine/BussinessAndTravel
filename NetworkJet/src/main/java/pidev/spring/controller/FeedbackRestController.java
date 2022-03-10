@@ -27,7 +27,7 @@ public class FeedbackRestController {
 	IFeedback feedbackService;
 		
 		
-		// http://localhost:8080/complaint/retrieve-all
+		// http://localhost:8080/feedback/retrieve-all
 		@GetMapping("/retrieve-all")
 		@ResponseBody
 		public List<Feedback> getFeedbacks() {
@@ -54,8 +54,11 @@ public class FeedbackRestController {
 		// http://localhost:8080/feedback/update/5
 				@PutMapping("/update/{id}")
 				@ResponseBody
-				public Feedback updateFeedback(@PathVariable("id") Long id, @RequestBody Feedback f) {
-					return feedbackService.updateFeedback(f, id);
+				public Feedback updateFeedback(Authentication auth,@PathVariable("id") Long id, @RequestBody Feedback f) {
+					SecurityContextHolder.getContext().setAuthentication(auth);
+					Session_UserDetails userDetails = (Session_UserDetails) auth.getPrincipal();
+					
+					return feedbackService.updateFeedback(f,id,userDetails.getId());
 					 
 				}
 				

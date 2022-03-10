@@ -62,13 +62,7 @@ public class  ComplaintServiceImpl implements IComplaint{
 		
 	}
 
-	@Override
-	public Complaint updateComplaint(Complaint c, Long id) {
-		Date dateComplaint = new Date();
-		c.setDateComplaint(dateComplaint);
-		c.setId(id);
-		return complaintRepository.save(c);
-	}
+	
 
 	@Override
 	public Complaint retrieveComplaint(Long id) {
@@ -126,6 +120,7 @@ public class  ComplaintServiceImpl implements IComplaint{
 	     this.sender.send(msg);
 	     
 	}
+        
 	     
 	     @Scheduled(cron="*/30 * * * * *")
 	 	public void nbreComplaintsByStatusComplaints(){
@@ -137,11 +132,32 @@ public class  ComplaintServiceImpl implements IComplaint{
 	 		System.out.println("nombre des Reclamations faible:"+nbrFaible);
 	 		
 	 	}
-	     
-	     
-	     
-	    
+
+		@Override
+		public Complaint updateComplaint(Complaint c, Long id,Long userid) {
+			User user = userRepository.findById(userid).orElse(null);
+			
+			if (user.getRole().stream().anyMatch(e -> e.getName().equals(ERole.ROLE_EMPLOYEE))) {
+				
+			
+			Date dateComplaint = new Date();
+			c.setDateComplaint(dateComplaint);
+			c.setId(id);
+			c.setUser(user);
+				return complaintRepository.save(c);
+		}
+			else
+			{
+				return null;
+				}
 		
-	}
+				}
+}
+		
+
+		
+		
+
+			
 
 

@@ -16,7 +16,7 @@ public interface IFeedback {
 	@Transactional
 	void deleteFeedback(Long id);
 
-	Feedback updateFeedback(Feedback f, Long id);
+	Feedback updateFeedback(Feedback f, Long id,Long userid);
 
 	Feedback retrieveFeedback(Long id);
 	
