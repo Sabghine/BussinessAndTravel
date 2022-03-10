@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import pidev.spring.entities.ERole;
 import pidev.spring.entities.Feedback;
+import pidev.spring.entities.Trophy;
 import pidev.spring.entities.User;
 import pidev.spring.repository.FeedbackRepository;
 import pidev.spring.repository.User_Repository;
@@ -16,7 +17,7 @@ import pidev.spring.repository.User_Repository;
 public class FeedbackServiceImpl implements IFeedback {
 
 	@Autowired
-	FeedbackRepository feebackRepository;
+	FeedbackRepository feedbackRepository;
 	
 	@Autowired
 	User_Repository userRepository;
@@ -24,7 +25,7 @@ public class FeedbackServiceImpl implements IFeedback {
 
 	@Override
 	public List<Feedback> retrieveAllFeedbacks() {
-		return feebackRepository.findAll();
+		return feedbackRepository.findAll();
 	}
 
 	@Override
@@ -36,7 +37,7 @@ public class FeedbackServiceImpl implements IFeedback {
 		Date dateFeedback = new Date();
 		f.setDatefeedback(dateFeedback);
 		f.setUser(user);
-		return feebackRepository.save(f);
+		return feedbackRepository.save(f);
 		}
 		else
 			return null;
@@ -46,7 +47,7 @@ public class FeedbackServiceImpl implements IFeedback {
 
 	@Override
 	public void deleteFeedback(Long id) {
-		feebackRepository.deleteById(id);
+		feedbackRepository.deleteById(id);
 		
 	}
 
@@ -55,13 +56,21 @@ public class FeedbackServiceImpl implements IFeedback {
 		Date dateFeedback = new Date();
 		f.setDatefeedback(dateFeedback);
 		f.setId(id);
-		return feebackRepository.save(f);
+		return feedbackRepository.save(f);
 	}
 
 	@Override
 	public Feedback retrieveFeedback(Long id) {
-		return feebackRepository.findById(id).orElse(null);
+		return feedbackRepository.findById(id).orElse(null);
 	}
+
+	@Override
+	public Trophy AffectTrophy(Long userid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 
 }
 

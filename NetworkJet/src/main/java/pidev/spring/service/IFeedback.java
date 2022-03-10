@@ -5,6 +5,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import pidev.spring.entities.Feedback;
+import pidev.spring.entities.Trophy;
 
 public interface IFeedback {
 	
@@ -18,5 +19,10 @@ public interface IFeedback {
 	Feedback updateFeedback(Feedback f, Long id);
 
 	Feedback retrieveFeedback(Long id);
+	
+	public Trophy AffectTrophy(Long userid);
+	
+	
+
 
 }
