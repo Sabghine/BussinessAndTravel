@@ -1,6 +1,12 @@
 package pidev.spring.controller;
 
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -15,8 +21,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lowagie.text.DocumentException;
+
 import pidev.spring.entities.Complaint;
 import pidev.spring.entities.StatusComplaints;
+import pidev.spring.service.ComplaintPDF;
 import pidev.spring.service.IComplaint;
 import pidev.spring.service.Session_UserDetails;
 
@@ -100,15 +109,33 @@ public class ComplaintRestController {
 			return complaintService.GetSortedComplaints(field);
 			}
 		 
+		 
+		 
 		 @PostMapping("/mail/{userId}")
-			@ResponseBody
-			public void sendMail( @PathVariable("userId") long userId) {
-				complaintService.sendMail(userId);
+		 @ResponseBody
+		 public void sendMail( @PathVariable("userId") long userId) {
+		complaintService.sendMail(userId);
 			}
+		 
+		 @GetMapping("/export/pdf")
+		    public void exportToPDF(HttpServletResponse response) throws DocumentException, IOException {
+		        response.setContentType("application/pdf");
+		        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+		        String currentDateTime = dateFormatter.format(new Date());
+		         
+		        String headerKey = "Content-Disposition";
+		        String headerValue = "attachment; filename=complaints_" + currentDateTime + ".pdf";
+		        response.setHeader(headerKey, headerValue);
+		         
+		        List<Complaint> listComplaints = complaintService.retrieveAllComplaints();
+		         
+		        ComplaintPDF exporter = new ComplaintPDF(listComplaints);
+		        exporter.export(response);
 		 
 		 
 		
 
 	}
+		 }
 
 	

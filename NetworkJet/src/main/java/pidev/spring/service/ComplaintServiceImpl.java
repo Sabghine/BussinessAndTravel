@@ -44,13 +44,10 @@ public class  ComplaintServiceImpl implements IComplaint{
 		
 		if (user.getRole().stream().anyMatch(e -> e.getName().equals(ERole.ROLE_EMPLOYEE))) {
 		
-
 		Date dateComplaint = new Date();
 		c.setDateComplaint(dateComplaint);
 		c.setUser(user);
-		
-		
-		return complaintRepository.save(c);
+			return complaintRepository.save(c);
 		}
 		else
 		{
