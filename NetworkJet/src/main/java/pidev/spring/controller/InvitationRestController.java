@@ -58,10 +58,16 @@ public class InvitationRestController {
 	@RequestMapping(value="/Statistics",method = RequestMethod.GET)
 	public String statistiques()
 	{
+		//get entreprises here (fichier text)
+		//for(int i=0;i<entreprises.size();i++){
+		
+		
 		String msg="Taux de Reussite des invitations : "+invitationService.tauxDeReussite()+"%";
 		
 		List<Invitation> listaccepter = invitationService.getAllByStatus(null);
 		List<Invitation> listEnAttente = invitationService.getAllNonAccepted();
+		
+		//
 		msg=msg+"\nListe des invitation accepter :"+listaccepter.size()+" invitations \n";
 		for(int i = 0;i<listaccepter.size();i++)
 		{

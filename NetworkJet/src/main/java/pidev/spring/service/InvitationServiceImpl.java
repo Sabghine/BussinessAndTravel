@@ -3,6 +3,8 @@ package pidev.spring.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import pidev.spring.entities.Invitation;
@@ -14,10 +16,23 @@ public class InvitationServiceImpl implements InvitationService {
 	@Autowired
 	InvitationRepository invitationRepository;
 	
+	@Autowired
+    private JavaMailSender emailSender;
+
+	
 	@Override
 	public Invitation saveInvitation(Invitation I) {
 		
-		return invitationRepository.save(I);
+		SimpleMailMessage message = new SimpleMailMessage(); 
+		
+        message.setFrom("iheb.saadaoui@esprit.tn");
+        message.setTo(I.getEmail()); 
+        message.setSubject("Invitation à NetworkJet"); 
+        message.setText("Votre entreprise vous invite à rejoindre la platforme NetworkJet. Votre invitation est valable jusqu'à "+I.getDate_expiration()+"\n"+I.getMessage());
+        
+        emailSender.send(message);
+        
+        return invitationRepository.save(I);
 	}
 
 	@Override
