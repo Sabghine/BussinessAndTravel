@@ -75,6 +75,12 @@ public class ComplaintRestController {
 		   return complaintService.CountComplaint();
 		   }
 		 
+		 @PostMapping("/mail/{userId}")
+			@ResponseBody
+			public void sendMail( @PathVariable("userId") long userId) {
+				complaintService.sendMail(userId);
+			}
+		 
 		 //@GetMapping("/recherche")
 		 // @ResponseBody
 		// public List<Complaint> SearchComp() {

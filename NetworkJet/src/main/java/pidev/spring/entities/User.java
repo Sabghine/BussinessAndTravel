@@ -1,16 +1,15 @@
 package pidev.spring.entities;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.Set;
 
-import javax.persistence.Column;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
@@ -22,8 +21,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-
-
 @Getter
 @Setter
 @NoArgsConstructor
@@ -31,36 +28,31 @@ import lombok.ToString;
 @RequiredArgsConstructor
 @ToString
 @EqualsAndHashCode
-@Entity
-public class Complaint implements Serializable{
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+
+@Entity
+public class User implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="complaintId")
-	private Long id;
+	private long userId;
 	
 	
 	@NonNull
-	private String object;
+	private String email;
 	
-	@NonNull
-	private String description;
 	
-	@NonNull
-	private String statut;
+
+
+
+	@OneToMany(cascade = CascadeType.ALL , mappedBy="user")
+	private Set<Feedback> feedback;
 	
-	@JsonFormat(pattern="yyyy-MM-dd")
-	private Date dateComplaint;
 	
-	@ManyToOne
+	
+	@OneToMany(cascade = CascadeType.ALL , mappedBy="user")
 	@JsonIgnore
-	private User user;
+	private Set<Complaint> complaints;
 	
-
-
 }
+	

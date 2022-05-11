@@ -6,10 +6,15 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
 
 import pidev.spring.entities.Complaint;
+import pidev.spring.entities.User;
 import pidev.spring.repository.ComplaintRepository;
+import pidev.spring.repository.UserRepository;
+
 
 
 
@@ -18,6 +23,14 @@ public class ComplaintServiceImpl implements IComplaint{
 	
 	@Autowired
 	ComplaintRepository complaintRepository;
+	
+	@Autowired
+	UserRepository userRepository;
+	
+	
+	
+	@Autowired
+	private MailSender sender;
 
 	@Override
 	public List<Complaint> retrieveAllComplaints() {
@@ -80,18 +93,18 @@ public class ComplaintServiceImpl implements IComplaint{
 			return max;	
 	}
 
-	//@Override
-	//public void sendMail(long userId) {
-	//	User u = userRepository.findById(userId).orElse(null);
-       // SimpleMailMessage msg = new SimpleMailMessage();
+	@Override
+	public void sendMail(long userId) {
+	User u = userRepository.findById(userId).orElse(null);
+    SimpleMailMessage msg = new SimpleMailMessage();
 
-      //  msg.setFrom("chedlikad@gmail.com");
-      //  msg.setTo(u.getEmail());
-      //  msg.setSubject("Champ de saisie du sujet");
-       // msg.setText("Champ de saisie du corps");
+     msg.setFrom("sabrine.networkjet@gmail.com");
+     msg.setTo(u.getEmail());
+     msg.setSubject("Employee en retard");
+     msg.setText(" email envoyé lors de test des metiers pidev  ");
 
-       // this.sender.send(msg);
-   // }
+      this.sender.send(msg);
+    }
 	
 		
 	//}

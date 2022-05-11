@@ -49,8 +49,8 @@ public class Feedback implements Serializable{
 	
 	private Date datefeedback;
 	
-	//@ManyToOne
-	//private User user;
+	@ManyToOne
+	private User user;
 	
 
 
