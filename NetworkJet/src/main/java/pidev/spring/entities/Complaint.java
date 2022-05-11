@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
@@ -53,6 +54,7 @@ public class Complaint implements Serializable{
 	@NonNull
 	private String statut;
 	
+	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date dateComplaint;
 	
 	//@ManyToOne

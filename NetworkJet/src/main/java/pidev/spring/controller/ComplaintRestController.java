@@ -24,7 +24,7 @@ public class ComplaintRestController {
 	IComplaint complaintService;
 	
 	// http://localhost:8080/complaint/retrieve-all-complaints
-		@GetMapping("/retrieve-all")
+		@GetMapping("/get-all")
 		@ResponseBody
 		public List<Complaint> getComplaints() {
 			return complaintService.retrieveAllComplaints();
